@@ -1,3 +1,4 @@
+<?php include(VIEWPATH."_header.php") ?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-lg-offset-2" >
@@ -37,12 +38,19 @@
                             </select>
                         </div>
 
+
                         <div class="form-group">
                             <label>Category</label>
                             <select class="form-control" id="category" name="category">
                                 <option value="">Select category</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <?php
+                                if($category->result_id->num_rows > 0){
+                                    foreach($category->result() as $u){ ?>
+                                        <option value="<?php echo $u->id;?>"><?php echo $u->category;?></option>
+                                    <?php
+                                    }
+                                }
+                                ?>
                             </select>
                         </div>
 
@@ -69,8 +77,7 @@
                     <h3 class="panel-title">Add Category</h3>
                 </div>
                 <div class="panel-body">
-
-                    <form action="" method="post">
+                    <?php echo form_open('form/add_category',array('name' => 'add_category','id' => 'add_category')); ?>
                         <div class="form-group">
                             <label>Category</label>
                             <input type="text" class="form-control" id="category" name="category" placeholder="Category">
@@ -82,7 +89,7 @@
                         </div>
 
                         <button type="submit" name="btn_submit"  class="btn btn-primary">Submit</button>
-                    </form>
+                    <?php echo form_close(); ?>
 
                 </div>
             </div>
@@ -95,3 +102,5 @@
  
     </div>
 </div>
+
+<?php include(VIEWPATH."_footer.php") ?>
