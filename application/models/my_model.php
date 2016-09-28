@@ -17,6 +17,13 @@ class My_model extends CI_Model {
     public function get_category(){
         return $this->db->get('category');  
     }
+    
+    public function get_data(){
+        $this->db->from('data');
+        $this->db->join('category', 'data.p_category = category.id');
+
+        return  $this->db->get();
+    }
 
 }
 

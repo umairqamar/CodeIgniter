@@ -13,6 +13,8 @@
                 <div class="panel-body">
 
                     <?php
+                    $message = $this->session->flashdata('message');
+                    $error = $this->session->flashdata('error');
                     if (isset($message)){ ?>
                         <div style="text-align:center;" class="alert alert-success" role="alert">
                             <span class="glyphicon glyphicon-exclamation-sign"></span>
@@ -33,7 +35,7 @@
                     ?>
 
 
-                    <?php echo form_open('form/add_category',array('name' => 'add_category','id' => 'add_category')); ?>
+                    <?php echo form_open('',array('name' => 'add_category','id' => 'add_category')); ?>
                     <div class="form-group">
                         <label>Category</label>
                         <input type="text" class="form-control" id="category" name="category" placeholder="Category">

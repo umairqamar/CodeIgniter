@@ -9,7 +9,29 @@
                 </div>
                 <div class="panel-body">
 
-                    <form action="" method="post">
+                    <?php
+                    $message = $this->session->flashdata('message');
+                    $error = $this->session->flashdata('error');
+                    if (isset($message)){ ?>
+                        <div style="text-align:center;" class="alert alert-success" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign"></span>
+                            <?php echo $message;?>
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                        </div>
+                        <?php
+                    }
+
+                    else if (isset($error)){ ?>
+                        <div style="text-align:center;" class="alert alert-danger" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign"></span>
+                            <?php echo $error; ?>
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                        </div>
+                        <?php
+                    }
+                    ?>
+
+                    <?php echo form_open('',array('name' => 'add_data','id' => 'add_data')); ?>
                         <div class="form-group">
                             <label>Type</label>
                             <select class="form-control" id="type" name="type">
@@ -63,9 +85,9 @@
                             <label>Denominator</label>
                             <input type="text" class="form-control" id="denominator" name="denominator" placeholder="Denominator">
                         </div>
-
-                        <button type="submit" name="btn_submit"  class="btn btn-primary">Submit</button>
-                    </form>
+                        <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>
+                        <button type="submit" name="btn_submit"  class="btn btn-primary pull-right">Submit</button>
+                    <?php echo form_close(); ?>
 
                 </div>
             </div>
@@ -75,5 +97,9 @@
 
     </div>
 </div>
-
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 <?php include(VIEWPATH."_footer.php") ?>

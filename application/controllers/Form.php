@@ -11,13 +11,19 @@ class Form extends CI_Controller {
 
     public function index()
     {
-        $this->add_data();
+        $this->view_all();
+    }
+    
+    public function view_all(){
+        
+        $data = array();
+        $data['data'] = $this->My_model->get_data();
+        $this->load->view('view_all',$data);
+        
     }
 
     public function add_data(){
-        $data = array();
-        $data['category'] = $this->My_model->get_category();
-        $this->load->view('add_data',$data);
+
 
         //Check if form is submitted by POST
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -38,22 +44,25 @@ class Form extends CI_Controller {
 
                 $this->My_model->add_data($db_data);
 
-                $data['message'] = 'Record added successfully';
+                $this->session->set_flashdata('message', 'Record added successfully');
+                redirect();
             }
             else{
-                $data['error'] = '';
+                $this->session->set_flashdata('error', validation_errors());
+                redirect();
             }
 
 
         }
+        $data = array();
+        $data['category'] = $this->My_model->get_category();
+        $this->load->view('add_data',$data);
 
 
     }
 
     public function add_category(){
-        $data = array();
 
-        $this->load->view('add_category');
 
         //Check if form is submitted by POST
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -68,8 +77,17 @@ class Form extends CI_Controller {
 
                 $this->My_model->add_category($db_data);
 
+                $this->session->set_flashdata('message', 'Record added successfully');
+                redirect();
+
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect();
             }
 
         }
+
+        $this->load->view('add_category');
     }
 }
