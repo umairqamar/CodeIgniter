@@ -8,7 +8,27 @@
                     <h3 class="panel-title">View all</h3>
                 </div>
                 <div class="panel-body">
+                    <?php
+                    $message = $this->session->flashdata('message');
+                    $error = $this->session->flashdata('error');
+                    if (isset($message)){ ?>
+                        <div style="text-align:center;" class="alert alert-success" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign"></span>
+                            <?php echo $message;?>
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                        </div>
+                        <?php
+                    }
 
+                    else if (isset($error)){ ?>
+                        <div style="text-align:center;" class="alert alert-danger" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign"></span>
+                            <?php echo $error; ?>
+                            <button type="button" class="close" data-dismiss="alert">x</button>
+                        </div>
+                        <?php
+                    }
+                    ?>
                     <table class="table table-striped">
                 <thead>
                 <tr>

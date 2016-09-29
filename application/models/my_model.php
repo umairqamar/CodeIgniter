@@ -42,5 +42,9 @@ class My_model extends CI_Model {
         $this->db->update("data",$db_data);
     }
 
+    public function delete_data($id){
+        $this->db->delete('data', array('id' => $id));
+    }
+
 }
 

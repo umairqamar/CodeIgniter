@@ -53,7 +53,9 @@ class Form extends CI_Controller {
     }
 
     public function delete($id){
-        
+        $this->My_model->delete_data($id);
+        $this->session->set_flashdata('message', 'Record deleted successfully');
+        redirect();
     }
 
 
