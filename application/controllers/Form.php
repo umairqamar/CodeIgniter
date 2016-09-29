@@ -59,7 +59,6 @@ class Form extends CI_Controller {
         redirect();
     }
 
-
     public function view_all(){
         
         $data = array();
@@ -134,7 +133,16 @@ class Form extends CI_Controller {
             }
 
         }
+        
+        $data = array();
+        $data['category'] = $this->My_model->get_category();
+        $this->load->view('add_category',$data);
+    }
 
-        $this->load->view('add_category');
+    public function edit_cat($id){
+        $data = array();
+        $data['category'] = $this->My_model->get_category_where($id);
+        $this->load->view('edit_cat',$data);
+        
     }
 }

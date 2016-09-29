@@ -34,6 +34,34 @@
                     }
                     ?>
 
+<!--                    <table class="table table-striped">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th>Category</th>-->
+<!--                            <th>Description</th>-->
+<!--                            <th>Action</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        --><?php //if($category->result_id->num_rows > 0){
+//                            foreach($category->result() as $u){ ?>
+<!--                                <tr>-->
+<!--                                    <td>--><?php //echo $u->category;?><!--</td>-->
+<!--                                    <td>--><?php //echo $u->description;?><!--</td>-->
+<!--                                    <td>-->
+<!--                                        <a href="--><?php //echo site_url("/form/edit_cat/".$u->id) ?><!--" >Edit</a> |-->
+<!--                                        <a href="--><?php //echo site_url("/form/delete_cat/".$u->id); ?><!--" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!---->
+<!--                                --><?php
+//                            }
+//                        }
+//
+//                        ?>
+<!--                        </tbody>-->
+<!--                    </table>-->
+
 
                     <?php echo form_open('',array('name' => 'add_category','id' => 'add_category')); ?>
                     <div class="form-group">

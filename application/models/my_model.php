@@ -15,9 +15,19 @@ class My_model extends CI_Model {
     }
     
     public function get_category(){
-        return $this->db->get('category');  
+
+        return $this->db->get('category');
+
     }
-    
+
+    public function get_category_where($id){
+        $this->db->from('category');
+        $this->db->where('id',$id);
+        $data = $this->db->get()->result();
+
+        return $data = $data[0];
+    }
+
     public function get_data(){
         $this->db->select('data.id,data.type,data.level,data.p_category,data.num,data.denom,category.category,category.description');
         $this->db->from('data');
@@ -43,7 +53,7 @@ class My_model extends CI_Model {
     }
 
     public function delete_data($id){
-        
+
         $this->db->delete('data', array('id' => $id));
     }
 

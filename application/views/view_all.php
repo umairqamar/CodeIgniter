@@ -29,7 +29,7 @@
                         <?php
                     }
                     ?>
-                    <table class="table table-striped">
+                <table class="table table-striped">
                 <thead>
                 <tr>
                     <th>Type</th>
