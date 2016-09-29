@@ -69,18 +69,24 @@
                             <td><?php echo $u->num;?></td>
                             <td><?php echo $u->denom;?></td>
                             <td>
-                                <a href="<?php echo site_url("/form/edit/".$u->id) ?>">Edit</a> |
-                                <a href="<?php echo site_url("/form/delete/".$u->id); ?>">Delete</a>
+                                <a href="<?php echo site_url("/form/edit/".$u->id) ?>" >Edit</a> |
+                                <a href="<?php echo site_url("/form/delete/".$u->id); ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
                             </td>
                         </tr>
+
                     <?php
                     }
                 }
+
                 ?>
                 </tbody>
             </table>
-
+<!--                    <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>-->
+                    <a href="form/add_data" class="btn btn-default ">Add Data</a>
+                    <a href="form/add_category" class="btn btn-default">Add Category</a>
                 </div>
+
+                
 
             </div>
 
@@ -90,9 +96,12 @@
     </div>
 </div>
 
-<script>
+<script type="text/javascript">
     function goBack() {
         window.history.back();
     }
+    
+
 </script>
+
 <?php include(VIEWPATH."_footer.php") ?>

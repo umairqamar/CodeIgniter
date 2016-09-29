@@ -45,7 +45,8 @@
                         <label>Description</label>
                         <textarea class="form-control" rows="5" id="description" name="description" placeholder="Category description goes here"></textarea>
                     </div>
-                    <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>
+<!--                    <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>-->
+                    <a href="<?php echo base_url();?>" class="btn btn-default pull-left">Back</a>
                     <button type="submit" name="btn_submit"  class="btn btn-primary pull-right">Submit</button>
                     <?php echo form_close(); ?>
                 </div>

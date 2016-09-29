@@ -85,7 +85,8 @@
                             <label>Denominator</label>
                             <input type="text" class="form-control" id="denominator" name="denominator" placeholder="Denominator">
                         </div>
-                        <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>
+                        <a href="<?php echo base_url();?>" class="btn btn-default pull-left">Back</a>
+<!--                        <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>-->
                         <button type="submit" name="btn_submit"  class="btn btn-primary pull-right">Submit</button>
                     <?php echo form_close(); ?>
 

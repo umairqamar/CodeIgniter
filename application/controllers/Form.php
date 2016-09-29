@@ -12,6 +12,7 @@ class Form extends CI_Controller {
     public function index()
     {
         $this->view_all();
+
     }
 
     public function edit($id){
@@ -91,11 +92,11 @@ class Form extends CI_Controller {
                 $this->My_model->add_data($db_data);
 
                 $this->session->set_flashdata('message', 'Record added successfully');
-                redirect();
+                redirect('form/add_data');
             }
             else{
                 $this->session->set_flashdata('error', validation_errors());
-                redirect();
+                redirect('form/add_data');
             }
 
 
@@ -124,12 +125,12 @@ class Form extends CI_Controller {
                 $this->My_model->add_category($db_data);
 
                 $this->session->set_flashdata('message', 'Record added successfully');
-                redirect();
+                redirect('form/add_category');
 
             }
             else{
                 $this->session->set_flashdata('error', validation_errors());
-                redirect();
+                redirect('form/add_category');
             }
 
         }
