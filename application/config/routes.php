@@ -52,3 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'form';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['form'] = 'form';
+$route['add_data'] = 'form/add_data';
+$route['add_category'] = 'form/add_category';

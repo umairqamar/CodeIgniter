@@ -13,12 +13,56 @@ class Form extends CI_Controller {
     {
         $this->view_all();
     }
-    
+
+    public function edit($id){
+        $data = array();
+        $data['category'] = $this->My_model->get_category();
+        $data['data'] = $this->My_model->get_data_where($id);
+        $this->load->view('edit',$data);
+
+
+        //Check if form is submitted by POST
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            
+            $this->form_validation->set_rules('type', 'Type', 'required');
+            $this->form_validation->set_rules('level', 'Level', 'required');
+            $this->form_validation->set_rules('category', 'Category', 'required');
+            $this->form_validation->set_rules('numerator', 'Numerator', 'required');
+            $this->form_validation->set_rules('denominator', 'Denominator', 'required');
+
+            if ($this->form_validation->run() != FALSE){
+                $db_data = array();
+                $db_data['type'] = $this->input->post('type', TRUE);
+                $db_data['level'] = $this->input->post('level', TRUE);
+                $db_data['p_category'] = $this->input->post('category', TRUE);
+                $db_data['num'] = $this->input->post('numerator', TRUE);
+                $db_data['denom'] = $this->input->post('denominator', TRUE);
+
+                $this->My_model->update_data($id,$db_data);
+
+                $this->session->set_flashdata('message', 'Record added successfully');
+                redirect();
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect();
+            }
+
+
+        }
+    }
+
+    public function delete($id){
+        
+    }
+
+
     public function view_all(){
         
         $data = array();
         $data['data'] = $this->My_model->get_data();
         $this->load->view('view_all',$data);
+
         
     }
 
