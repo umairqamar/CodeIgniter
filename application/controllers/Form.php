@@ -11,15 +11,15 @@ class Form extends CI_Controller {
 
     public function index()
     {
-        $this->view_all();
+        $this->view_kpi();
 
     }
 
-    public function edit($id){
+    public function edit_kpi($id){
         $data = array();
-        $data['category'] = $this->My_model->get_category();
-        $data['data'] = $this->My_model->get_data_where($id);
-        $this->load->view('edit',$data);
+        $data['kpi_category'] = $this->My_model->get_kpi_category();
+        $data['kpi'] = $this->My_model->get_kpi_where($id);
+        $this->load->view('edit_kpi',$data);
 
 
         //Check if form is submitted by POST
@@ -39,7 +39,7 @@ class Form extends CI_Controller {
                 $db_data['num'] = $this->input->post('numerator', TRUE);
                 $db_data['denom'] = $this->input->post('denominator', TRUE);
 
-                $this->My_model->update_data($id,$db_data);
+                $this->My_model->update_kpi($id,$db_data);
 
                 $this->session->set_flashdata('message', 'Record added successfully');
                 redirect();
@@ -53,22 +53,22 @@ class Form extends CI_Controller {
         }
     }
 
-    public function delete($id){
-        $this->My_model->delete_data($id);
+    public function delete_kpi($id){
+        $this->My_model->delete_kpi($id);
         $this->session->set_flashdata('message', 'Record deleted successfully');
         redirect();
     }
 
-    public function view_all(){
+    public function view_kpi(){
         
         $data = array();
-        $data['data'] = $this->My_model->get_data();
-        $this->load->view('view_all',$data);
+        $data['kpi'] = $this->My_model->get_kpi();
+        $this->load->view('view_kpi',$data);
 
         
     }
 
-    public function add_data(){
+    public function add_kpi(){
 
 
         //Check if form is submitted by POST
@@ -88,32 +88,36 @@ class Form extends CI_Controller {
                 $db_data['num'] = $this->input->post('numerator', TRUE);
                 $db_data['denom'] = $this->input->post('denominator', TRUE);
 
-                $this->My_model->add_data($db_data);
+                $this->My_model->add_kpi($db_data);
 
                 $this->session->set_flashdata('message', 'Record added successfully');
-                redirect('form/add_data');
+                redirect('form/add_kpi');
             }
             else{
                 $this->session->set_flashdata('error', validation_errors());
-                redirect('form/add_data');
+                redirect('form/add_kpi');
             }
 
 
         }
         $data = array();
-        $data['category'] = $this->My_model->get_category();
-        $this->load->view('add_data',$data);
+        $data['kpi_category'] = $this->My_model->get_kpi_category();
+        $this->load->view('add_kpi',$data);
 
 
     }
 
-    public function add_category(){
+    public function add_kpi_category(){
 
 
         //Check if form is submitted by POST
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-            $this->form_validation->set_rules('category', 'Category', 'required|trim|max_length[50]');
+            $this->form_validation->set_rules('category', 'Category', 'required|is_unique[kpi_category.category]|max_length[50]'
+            ,array(
+                    'is_unique'     => 'This %s already exists.'
+                )
+                );
 
             if ($this->form_validation->run() != FALSE){
 
@@ -121,28 +125,23 @@ class Form extends CI_Controller {
                 $db_data['category'] = $this->input->post('category', TRUE);
                 $db_data['description'] = $this->input->post('description', TRUE);
 
-                $this->My_model->add_category($db_data);
+                $this->My_model->add_kpi_category($db_data);
 
                 $this->session->set_flashdata('message', 'Record added successfully');
-                redirect('form/add_category');
+                redirect('form/add_kpi_category');
 
             }
             else{
                 $this->session->set_flashdata('error', validation_errors());
-                redirect('form/add_category');
+                redirect('form/add_kpi_category');
             }
 
         }
         
         $data = array();
-        $data['category'] = $this->My_model->get_category();
-        $this->load->view('add_category',$data);
+        $data['kpi_category'] = $this->My_model->get_kpi_category();
+        $this->load->view('add_kpi_category',$data);
     }
 
-    public function edit_cat($id){
-        $data = array();
-        $data['category'] = $this->My_model->get_category_where($id);
-        $this->load->view('edit_cat',$data);
-        
-    }
+    
 }

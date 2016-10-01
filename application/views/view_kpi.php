@@ -41,23 +41,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php if($data->result_id->num_rows > 0){
-                    foreach($data->result() as $u){ ?>
+                <?php if($kpi->result_id->num_rows > 0){
+                    foreach($kpi->result() as $u){ ?>
                         <tr>
                             <td>
                                 <?php
                                     switch ($u->type) {
-                                        case "1":
-                                            echo "IN";
+                                        case "IN":
+                                            echo "Input";
                                             break;
-                                        case "2":
-                                            echo "OP";
+                                        case "OP":
+                                            echo "Output";
                                             break;
-                                        case "3":
-                                            echo "PO";
+                                        case "PO":
+                                            echo "Process";
                                             break;
-                                        case "4":
-                                            echo "OC";
+                                        case "OC":
+                                            echo "Outcome";
                                             break;
                                         default:
                                             echo "--";
@@ -69,8 +69,8 @@
                             <td><?php echo $u->num;?></td>
                             <td><?php echo $u->denom;?></td>
                             <td>
-                                <a href="<?php echo site_url("/form/edit/".$u->id) ?>" >Edit</a> |
-                                <a href="<?php echo site_url("/form/delete/".$u->id); ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+                                <a href="<?php echo site_url("/form/edit_kpi/".$u->kpi_id) ?>" >Edit</a> |
+                                <a href="<?php echo site_url("/form/delete_kpi/".$u->kpi_id); ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
                             </td>
                         </tr>
 
@@ -82,8 +82,8 @@
                 </tbody>
             </table>
 <!--                    <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>-->
-                    <a href="form/add_data" class="btn btn-default ">Add Data</a>
-                    <a href="form/add_category" class="btn btn-default">Add Category</a>
+                    <a href="form/add_kpi" class="btn btn-default ">Add KPI</a>
+                    <a href="form/add_kpi_category" class="btn btn-default">Add KPI Category</a>
                 </div>
 
                 

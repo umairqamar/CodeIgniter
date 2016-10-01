@@ -36,10 +36,10 @@
                             <label>Type</label>
                             <select class="form-control" id="type" name="type">
                                 <option value="">Select type</option>
-                                <option value="1">IN</option>
-                                <option value="2">OP</option>
-                                <option value="3">PO</option>
-                                <option value="4">OC</option>
+                                <option value="IN">Input</option>
+                                <option value="OP">Output</option>
+                                <option value="PO">Process</option>
+                                <option value="OC">Outcome</option>
                             </select>
                         </div>
 
@@ -66,9 +66,9 @@
                             <select class="form-control" id="category" name="category">
                                 <option value="">Select category</option>
                                 <?php
-                                if($category->result_id->num_rows > 0){
-                                    foreach($category->result() as $u){ ?>
-                                        <option value="<?php echo $u->id;?>"><?php echo $u->category;?></option>
+                                if($kpi_category->result_id->num_rows > 0){
+                                    foreach($kpi_category->result() as $u){ ?>
+                                        <option value="<?php echo $u->kpi_cat_id;?>"><?php echo $u->category;?></option>
                                         <?php
                                     }
                                 }

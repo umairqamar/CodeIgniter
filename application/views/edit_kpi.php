@@ -5,7 +5,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Edit: <?php echo $data->id;?></h3>
+                    <h3 class="panel-title">Edit: <?php echo $kpi->kpi_id;?></h3>
                 </div>
                 <div class="panel-body">
 
@@ -30,30 +30,30 @@
                         <?php
                     }
                     ?>
-                    <?php echo form_open('form/edit/'.$data->id, array('name' => 'edit_data','id' => 'edit_data')); ?>
+                    <?php echo form_open('form/edit_kpi/'.$kpi->kpi_id, array('name' => 'edit_data','id' => 'edit_data')); ?>
                     <div class="form-group">
                         <label>Type</label>
                         <select class="form-control" id="type" name="type">
-                            <option value="1" <?php echo ($data->type =="1")?'selected':''; ?>>IN</option>
-                            <option value="2" <?php echo ($data->type =="2")?'selected':''; ?>>OP</option>
-                            <option value="3" <?php echo ($data->type =="3")?'selected':''; ?>>PO</option>
-                            <option value="4" <?php echo ($data->type =="4")?'selected':''; ?>>OC</option>
+                            <option value="IN" <?php echo ($kpi->type =="IN")?'selected':''; ?>>Input</option>
+                            <option value="OP" <?php echo ($kpi->type =="OP")?'selected':''; ?>>Output</option>
+                            <option value="PO" <?php echo ($kpi->type =="PO")?'selected':''; ?>>Process</option>
+                            <option value="OC" <?php echo ($kpi->type =="OC")?'selected':''; ?>>Outcome</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Level</label>
                         <select class="form-control" id="level" name="level">
-                            <option value="0" <?php echo ($data->level =="0")?'selected':''; ?>>0</option>
-                            <option value="1" <?php echo ($data->level =="1")?'selected':''; ?>>1</option>
-                            <option value="2" <?php echo ($data->level =="2")?'selected':''; ?>>2</option>
-                            <option value="3" <?php echo ($data->level =="3")?'selected':''; ?>>3</option>
-                            <option value="4" <?php echo ($data->level =="4")?'selected':''; ?>>4</option>
-                            <option value="5" <?php echo ($data->level =="5")?'selected':''; ?>>5</option>
-                            <option value="6" <?php echo ($data->level =="6")?'selected':''; ?>>6</option>
-                            <option value="7" <?php echo ($data->level =="7")?'selected':''; ?>>7</option>
-                            <option value="8" <?php echo ($data->level =="8")?'selected':''; ?>>8</option>
-                            <option value="9" <?php echo ($data->level =="9")?'selected':''; ?>>9</option>
+                            <option value="0" <?php echo ($kpi->level =="0")?'selected':''; ?>>0</option>
+                            <option value="1" <?php echo ($kpi->level =="1")?'selected':''; ?>>1</option>
+                            <option value="2" <?php echo ($kpi->level =="2")?'selected':''; ?>>2</option>
+                            <option value="3" <?php echo ($kpi->level =="3")?'selected':''; ?>>3</option>
+                            <option value="4" <?php echo ($kpi->level =="4")?'selected':''; ?>>4</option>
+                            <option value="5" <?php echo ($kpi->level =="5")?'selected':''; ?>>5</option>
+                            <option value="6" <?php echo ($kpi->level =="6")?'selected':''; ?>>6</option>
+                            <option value="7" <?php echo ($kpi->level =="7")?'selected':''; ?>>7</option>
+                            <option value="8" <?php echo ($kpi->level =="8")?'selected':''; ?>>8</option>
+                            <option value="9" <?php echo ($kpi->level =="9")?'selected':''; ?>>9</option>
                         </select>
                     </div>
 
@@ -63,9 +63,9 @@
                         <select class="form-control" id="category" name="category">
 
                             <?php
-                            if($category->result_id->num_rows > 0){
-                                foreach($category->result() as $u){ ?>
-                                    <option value="<?php echo $u->id;?>" <?php echo ($data->p_category == $u->id )?'selected':''; ?>><?php echo $u->category;?></option>
+                            if($kpi_category->result_id->num_rows > 0){
+                                foreach($kpi_category->result() as $u){ ?>
+                                    <option value="<?php echo $u->kpi_cat_id;?>" <?php echo ($kpi->p_category == $u->kpi_cat_id )?'selected':''; ?>><?php echo $u->category;?></option>
                                     <?php
                                 }
                             }
@@ -75,12 +75,12 @@
 
                     <div class="form-group">
                         <label>Numerator</label>
-                        <input type="text" class="form-control" id="numerator" name="numerator" value="<?php echo $data->num;?>">
+                        <input type="text" class="form-control" id="numerator" name="numerator" value="<?php echo $kpi->num;?>">
                     </div>
 
                     <div class="form-group">
                         <label>Denominator</label>
-                        <input type="text" class="form-control" id="denominator" name="denominator" value="<?php echo $data->denom;?>">
+                        <input type="text" class="form-control" id="denominator" name="denominator" value="<?php echo $kpi->denom;?>">
                     </div>
                     <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>
                     <button type="submit" name="btn_submit"  class="btn btn-primary pull-right">Submit</button>
