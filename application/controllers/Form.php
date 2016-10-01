@@ -17,6 +17,7 @@ class Form extends CI_Controller {
 
     public function edit_kpi($id){
         $data = array();
+        $data['title'] = "Edit KPI";
         $data['kpi_category'] = $this->My_model->get_kpi_category();
         $data['kpi'] = $this->My_model->get_kpi_where($id);
         $this->load->view('edit_kpi',$data);
@@ -62,6 +63,7 @@ class Form extends CI_Controller {
     public function view_kpi(){
         
         $data = array();
+        $data['title'] = "View KPI";
         $data['kpi'] = $this->My_model->get_kpi();
         $this->load->view('view_kpi',$data);
 
@@ -101,6 +103,7 @@ class Form extends CI_Controller {
 
         }
         $data = array();
+        $data['title'] = "Add KPI";
         $data['kpi_category'] = $this->My_model->get_kpi_category();
         $this->load->view('add_kpi',$data);
 
@@ -139,6 +142,7 @@ class Form extends CI_Controller {
         }
         
         $data = array();
+        $data['title'] = "Add KPI Category";
         $data['kpi_category'] = $this->My_model->get_kpi_category();
         $this->load->view('add_kpi_category',$data);
     }
