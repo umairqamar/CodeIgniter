@@ -11,7 +11,7 @@ class Form extends CI_Controller {
 
     public function index()
     {
-        $this->add_kra();
+        $this->view_kra();
 
     }
 
@@ -186,6 +186,23 @@ class Form extends CI_Controller {
             }
         }
 
+    }
+    
+    public function view_kra(){
+        $data = array();
+        $data['title'] = "View KRA";
+        $data['kra'] = $this->My_model->get_kra();
+        $this->load->view('kra/view_kra',$data);
+    }
+    
+    public function detail_kra($id){
+        $data = array();
+        $data['title'] = "View KRA";
+
+        $data['kra'] = $this->My_model->get_kra_where($id);
+        //print_r($data);exit;
+        $this->load->view('kra/detail_kra',$data);
+        
     }
 
     

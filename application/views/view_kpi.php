@@ -5,7 +5,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">View all</h3>
+                    <h3 class="panel-title">View KPI</h3>
                 </div>
                 <div class="panel-body">
                     <?php
@@ -81,7 +81,7 @@
                 ?>
                 </tbody>
             </table>
-<!--                    <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>-->
+<!--                    <button onclick="goBack()" name="btn_back"  class="btn btn-default pull-left">Back</button>-->
                     <a href="form/add_kpi" class="btn btn-default ">Add KPI</a>
                     <a href="form/add_kpi_category" class="btn btn-default">Add KPI Category</a>
                 </div>

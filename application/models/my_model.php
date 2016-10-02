@@ -62,24 +62,47 @@ class My_model extends CI_Model {
         $this->db->insert("kra",$data);
 
         $insert_id = $this->db->insert_id();
-       // $i = count($kra,COUNT_RECURSIVE);
-
-        $kra['kra'] = $insert_id;
+        //print_r($kra);exit;
         $kpi_list = $kra['kpi'];
-
-        for($i =0; $i<count($kra,COUNT_RECURSIVE); $i++){
-            $kra['kpi'] = $kpi_list[$i];
-            echo $kra['kpi'];
-            $this->db->insert("kpi_kra",$kra);
+        for ($i=0; $i<count($kra,COUNT_RECURSIVE);$i++){
+            $this->db->query( "INSERT INTO kpi_kra (kra, kpi) VALUES ('$insert_id', '$kpi_list[$i]')");
         }
+
+
+
+//        $kra['kra'] = $insert_id;
+//        $kpi_list = $kra['kpi'];
+//
+//        if (is_array($kra)){
+//            for($i =0; $i<count($kra,COUNT_RECURSIVE); $i++){
+//                $kra['kpi'] = $kpi_list[$i];
+//                $this->db->insert("kpi_kra",$kra);
+//            }
+//        }
+//        else{
+//            $this->db->insert("kpi_kra",$kra);
+//        }
+
 
 
     }
     
-    public function insert_batch_kpi($data){
-       print_r($data);
-        $this->db->insert_batch('kpi_kra', $data);
-        print_r($data);exit;
+    public function get_kra(){
+        $this->db->from('kra');
+        return  $this->db->get();
+    }
+
+    public function get_kra_where($id){
+        $this->db->select('kra_id,code,description,kpi_id,type,level,p_category,num,denom');
+        $this->db->from('kra');
+        $this->db->join('kpi_kra', 'kpi_kra.kra = kra.kra_id');
+        $this->db->join('kpi', 'kpi.kpi_id = kpi_kra.kpi');
+        $this->db->where('kra_id',$id);
+        $kpi = $this->db->get()->result_array();
+
+        return $kpi;
+        //return $kpi = $kpi[0];
+
     }
 
 }
