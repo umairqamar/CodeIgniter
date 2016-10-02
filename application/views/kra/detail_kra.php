@@ -29,39 +29,38 @@
                         <?php
                     }
                     ?>
-
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr>
+                            <th>KPI #</th>
+                            <th>Type</th>
+                            <th>Level</th>
+                            <th>Category</th>
+                            <th>Numerator</th>
+                            <th>Denominator</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
                     <?php
 
                     foreach($kra as $k){ ?>
-                        <p class="help-block"><?php echo  $k['code']."-". $k['description']; ?></p>
-                        <table class="table table-condensed">
-                            <thead>
-                            <tr>
-                                <th>KPI #</th>
-                                <th>Type</th>
-                                <th>Level</th>
-                                <th>Category</th>
-                                <th>Numerator</th>
-                                <th>Denominator</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+
+
                             <tr>
                                 <td><?php echo $k['kpi_id'];?></td>
-                                <td><?php echo $k['type'];?></td>
+                                <td><?php echo get_type($k['type']);?></td>
                                 <td><?php echo $k['level'];?></td>
-                                <td><?php echo $k['p_category'];?></td>
+                                <td><?php echo $k['category'];?></td>
                                 <td><?php echo $k['num'];?></td>
                                 <td><?php echo $k['denom'];?></td>
                                 <td>
-                                    <a href="<?php echo site_url("/form/edit_kra/".$k['kpi_id']) ?>" >Edit</a> |
-                                    <a href="<?php echo site_url("/form/delete_kra/".$k['kpi_id']); ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+                                    <a href="<?php echo site_url("/form/edit_kra/".$k['kra_id']."/".$k['id']) ?>" >Edit</a> |
+                                    <a href="<?php echo site_url("/form/delete_kpi_kra/".$k['kra_id']."/".$k['kpi_id']); ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
                                 </td>
                             </tr>
 
-                            </tbody>
-                        </table>
+
 
                         <?php
                     }
@@ -69,7 +68,8 @@
 
 
                     ?>
-
+                        </tbody>
+                    </table>
 
 
 

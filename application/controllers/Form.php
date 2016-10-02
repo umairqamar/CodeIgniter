@@ -7,6 +7,7 @@ class Form extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('My_model');
+        $this->load->helper('general_helper');
     }
 
     public function index()
@@ -203,6 +204,20 @@ class Form extends CI_Controller {
         //print_r($data);exit;
         $this->load->view('kra/detail_kra',$data);
         
+    }
+
+    //This will delete KRA
+    public function delete_kra($id){
+        $this->My_model->delete_kra($id);
+        $this->session->set_flashdata('message', 'Record deleted successfully');
+        redirect('form/view_kra');
+    }
+
+    //This will delete a signle KPI in a KRA
+    public function delete_kpi_kra($kra,$kpi){
+        $this->My_model->delete_kpi_kra($kra,$kpi);
+        $this->session->set_flashdata('message', 'Record deleted successfully');
+        redirect('form/detail_kra/'.$kra);
     }
 
     
