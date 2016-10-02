@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2016 at 10:42 AM
+-- Generation Time: Oct 02, 2016 at 09:59 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.6
 
@@ -35,6 +35,16 @@ CREATE TABLE `kpi` (
   `denom` varchar(155) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Key Performance Indicators ';
 
+--
+-- Dumping data for table `kpi`
+--
+
+INSERT INTO `kpi` (`kpi_id`, `type`, `level`, `p_category`, `num`, `denom`) VALUES
+(1, 'IN', 0, '25', '123', '456'),
+(2, 'OP', 1, '25', '564', '123'),
+(3, 'OC', 2, '25', '456', 'asfasf'),
+(4, 'OP', 0, '25', '1', 'asfasf');
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +57,32 @@ CREATE TABLE `kpi_category` (
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `kpi_category`
+--
+
+INSERT INTO `kpi_category` (`kpi_cat_id`, `category`, `description`) VALUES
+(25, 'Category 1', 'Category Description goes here');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kpi_kra`
+--
+
+CREATE TABLE `kpi_kra` (
+  `kra` int(11) NOT NULL COMMENT 'Foreign key',
+  `kpi` int(11) NOT NULL COMMENT 'Foreign key,Multiple values'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Relationship between KRA and KPI';
+
+--
+-- Dumping data for table `kpi_kra`
+--
+
+INSERT INTO `kpi_kra` (`kra`, `kpi`) VALUES
+(78, 1),
+(78, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -54,8 +90,17 @@ CREATE TABLE `kpi_category` (
 --
 
 CREATE TABLE `kra` (
-  `kra_id` int(11) NOT NULL
+  `kra_id` int(11) NOT NULL,
+  `code` text,
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kra`
+--
+
+INSERT INTO `kra` (`kra_id`, `code`, `description`) VALUES
+(78, 'Code 01', 'Description');
 
 --
 -- Indexes for dumped tables
@@ -87,17 +132,17 @@ ALTER TABLE `kra`
 -- AUTO_INCREMENT for table `kpi`
 --
 ALTER TABLE `kpi`
-  MODIFY `kpi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `kpi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `kpi_category`
 --
 ALTER TABLE `kpi_category`
-  MODIFY `kpi_cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `kpi_cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `kra`
 --
 ALTER TABLE `kra`
-  MODIFY `kra_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
