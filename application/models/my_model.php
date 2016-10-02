@@ -57,5 +57,30 @@ class My_model extends CI_Model {
         $this->db->delete('kpi', array('kpi_id' => $id));
     }
 
+    public function add_kra($data,$kra){
+
+        $this->db->insert("kra",$data);
+
+        $insert_id = $this->db->insert_id();
+       // $i = count($kra,COUNT_RECURSIVE);
+
+        $kra['kra'] = $insert_id;
+        $kpi_list = $kra['kpi'];
+
+        for($i =0; $i<count($kra,COUNT_RECURSIVE); $i++){
+            $kra['kpi'] = $kpi_list[$i];
+            echo $kra['kpi'];
+            $this->db->insert("kpi_kra",$kra);
+        }
+
+
+    }
+    
+    public function insert_batch_kpi($data){
+       print_r($data);
+        $this->db->insert_batch('kpi_kra', $data);
+        print_r($data);exit;
+    }
+
 }
 

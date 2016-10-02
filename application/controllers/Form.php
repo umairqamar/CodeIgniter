@@ -11,7 +11,7 @@ class Form extends CI_Controller {
 
     public function index()
     {
-        $this->view_kpi();
+        $this->add_kra();
 
     }
 
@@ -145,6 +145,47 @@ class Form extends CI_Controller {
         $data['title'] = "Add KPI Category";
         $data['kpi_category'] = $this->My_model->get_kpi_category();
         $this->load->view('add_kpi_category',$data);
+    }
+
+    public function add_kra(){
+
+        $data = array();
+        $data['title'] = "Add KRA";
+        $data['kpi'] = $this->My_model->get_kpi();
+        $this->load->view('kra/add_kra',$data);
+
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+           
+
+            $this->form_validation->set_rules('code', 'Code', 'required|max_length[50]'
+                ,array(
+                    'is_unique'     => 'This %s already exists.'
+                )
+            );
+            //$this->form_validation->set_rules('kra', 'KRA', 'required');
+
+            if ($this->form_validation->run() != FALSE){
+                $db_data = array();
+                $db_data['code'] = $this->input->post('code', TRUE);
+                $db_data['description'] = $this->input->post('description', TRUE);
+
+                $db_kra = array();
+                $db_kra['kpi'] = $this->input->post('kpi', TRUE);
+                
+                $this->My_model->add_kra($db_data,$db_kra);
+
+                
+
+                $this->session->set_flashdata('message', 'Record added successfully');
+                redirect('form/add_kra');
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('form/add_kra');
+            }
+        }
+
     }
 
     
