@@ -55,7 +55,7 @@
                                 <td><?php echo $k['num'];?></td>
                                 <td><?php echo $k['denom'];?></td>
                                 <td>
-                                    <a href="<?php echo site_url("/form/edit_kra/".$k['kra_id']."/".$k['id']) ?>" >Edit</a> |
+<!--                                    <a href="--><?php //echo site_url("/form/edit_kra/".$k['kra_id']."/".$k['id']) ?><!--" >Edit</a> |-->
                                     <a href="<?php echo site_url("/form/delete_kpi_kra/".$k['kra_id']."/".$k['kpi_id']); ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
                                 </td>
                             </tr>

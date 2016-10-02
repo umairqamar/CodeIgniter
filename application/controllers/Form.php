@@ -12,6 +12,7 @@ class Form extends CI_Controller {
 
     public function index()
     {
+        
         $this->view_kra();
 
     }
@@ -21,7 +22,7 @@ class Form extends CI_Controller {
         $data['title'] = "Edit KPI";
         $data['kpi_category'] = $this->My_model->get_kpi_category();
         $data['kpi'] = $this->My_model->get_kpi_where($id);
-        $this->load->view('edit_kpi',$data);
+        $this->load->view('kpi/edit_kpi',$data);
 
 
         //Check if form is submitted by POST
@@ -44,11 +45,11 @@ class Form extends CI_Controller {
                 $this->My_model->update_kpi($id,$db_data);
 
                 $this->session->set_flashdata('message', 'Record added successfully');
-                redirect();
+                redirect('kpi/edit_kpi');
             }
             else{
                 $this->session->set_flashdata('error', validation_errors());
-                redirect();
+                redirect('kpi/edit_kpi');
             }
 
 
@@ -58,7 +59,7 @@ class Form extends CI_Controller {
     public function delete_kpi($id){
         $this->My_model->delete_kpi($id);
         $this->session->set_flashdata('message', 'Record deleted successfully');
-        redirect();
+        redirect('form/delete_kpi');
     }
 
     public function view_kpi(){
@@ -66,7 +67,7 @@ class Form extends CI_Controller {
         $data = array();
         $data['title'] = "View KPI";
         $data['kpi'] = $this->My_model->get_kpi();
-        $this->load->view('view_kpi',$data);
+        $this->load->view('kpi/view_kpi',$data);
 
         
     }
@@ -106,7 +107,7 @@ class Form extends CI_Controller {
         $data = array();
         $data['title'] = "Add KPI";
         $data['kpi_category'] = $this->My_model->get_kpi_category();
-        $this->load->view('add_kpi',$data);
+        $this->load->view('kpi/add_kpi',$data);
 
 
     }
@@ -145,7 +146,7 @@ class Form extends CI_Controller {
         $data = array();
         $data['title'] = "Add KPI Category";
         $data['kpi_category'] = $this->My_model->get_kpi_category();
-        $this->load->view('add_kpi_category',$data);
+        $this->load->view('kpi/add_kpi_category',$data);
     }
 
     public function add_kra(){

@@ -19,5 +19,5 @@
 </head>
 
 <body>
-
+<?php include(VIEWPATH."navbar.php") ?>
 

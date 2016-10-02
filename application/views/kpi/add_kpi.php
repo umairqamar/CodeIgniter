@@ -1,11 +1,11 @@
 <?php include(VIEWPATH."_header.php") ?>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 col-lg-offset-2" >
+        <div class="col-md-12 " >
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Bootstrap Form</h3>
+                    <h3 class="panel-title">Add KPI</h3>
                 </div>
                 <div class="panel-body">
 
@@ -85,7 +85,7 @@
                             <label>Denominator</label>
                             <input type="text" class="form-control" id="denominator" name="denominator" placeholder="Denominator">
                         </div>
-                        <a href="<?php echo base_url();?>" class="btn btn-default pull-left">Back</a>
+<!--                        <a href="--><?php //echo base_url();?><!--" class="btn btn-default pull-left">Back</a>-->
 <!--                        <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>-->
                         <button type="submit" name="btn_submit"  class="btn btn-primary pull-right">Submit</button>
                     <?php echo form_close(); ?>

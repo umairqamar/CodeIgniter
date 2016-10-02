@@ -1,7 +1,7 @@
 <?php include(VIEWPATH."_header.php") ?>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 col-lg-offset-2" >
+        <div class="col-md-12 " >
 
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -82,8 +82,8 @@
                 </tbody>
             </table>
 <!--                    <button onclick="goBack()" name="btn_back"  class="btn btn-default pull-left">Back</button>-->
-                    <a href="form/add_kpi" class="btn btn-default ">Add KPI</a>
-                    <a href="form/add_kpi_category" class="btn btn-default">Add KPI Category</a>
+<!--                    <a href="form/add_kpi" class="btn btn-default ">Add KPI</a>-->
+<!--                    <a href="form/add_kpi_category" class="btn btn-default">Add KPI Category</a>-->
                 </div>
 
                 

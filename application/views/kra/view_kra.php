@@ -59,7 +59,7 @@
                         ?>
                         </tbody>
                     </table>
-                    <button onclick="goBack()" name="btn_back"  class="btn btn-default pull-left">Back</button>
+<!--                    <button onclick="goBack()" name="btn_back"  class="btn btn-default pull-left">Back</button>-->
                 </div>
 
 

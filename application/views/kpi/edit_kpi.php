@@ -1,7 +1,7 @@
 <?php include(VIEWPATH."_header.php") ?>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 col-lg-offset-2" >
+        <div class="col-md-12 " >
 
             <div class="panel panel-default">
                 <div class="panel-heading">

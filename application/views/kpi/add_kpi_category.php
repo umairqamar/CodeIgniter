@@ -1,7 +1,7 @@
 <?php include(VIEWPATH."_header.php") ?>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 col-lg-offset-2" >
+        <div class="col-md-12 " >
 
 
 
@@ -47,7 +47,7 @@
                         <textarea class="form-control" rows="5" id="description" name="description" placeholder="Category description goes here"></textarea>
                     </div>
 <!--                    <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>-->
-                    <a href="<?php echo base_url();?>" class="btn btn-default pull-left">Back</a>
+<!--                    <a href="--><?php //echo base_url();?><!--" class="btn btn-default pull-left">Back</a>-->
                     <button type="submit" name="btn_submit"  class="btn btn-primary pull-right">Submit</button>
                     <?php echo form_close(); ?>
                 </div>
