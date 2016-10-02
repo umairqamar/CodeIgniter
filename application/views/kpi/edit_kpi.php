@@ -30,7 +30,7 @@
                         <?php
                     }
                     ?>
-                    <?php echo form_open('form/edit_kpi/'.$kpi->kpi_id, array('name' => 'edit_data','id' => 'edit_data')); ?>
+                    <?php echo form_open('form/edit_kpi/'.$kpi->kpi_id, array('name' => 'edit_kpi','id' => 'edit_kpi')); ?>
                     <div class="form-group">
                         <label>Type</label>
                         <select class="form-control" id="type" name="type">

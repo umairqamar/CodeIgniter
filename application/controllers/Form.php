@@ -160,7 +160,7 @@ class Form extends CI_Controller {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
            
 
-            $this->form_validation->set_rules('code', 'Code', 'required|max_length[50]'
+            $this->form_validation->set_rules('code', 'Code', 'required|max_length[50]|is_unique[kra.code]'
                 ,array(
                     'is_unique'     => 'This %s already exists.'
                 )
@@ -205,6 +205,14 @@ class Form extends CI_Controller {
         //print_r($data);exit;
         $this->load->view('kra/detail_kra',$data);
         
+    }
+
+    public function edit_kra($id){
+        $data = array();
+        $data['title'] = "Edit KRA";
+        $data['kra'] = $this->My_model->get_kra_where($id);
+        print_r($data);
+        $this->load->view('kra/edit_kra',$data);
     }
 
     //This will delete KRA

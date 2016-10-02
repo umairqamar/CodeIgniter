@@ -92,6 +92,8 @@ class My_model extends CI_Model {
 
     }
 
+   
+
     //This will delete a KRA
     public function delete_kra($id){
         //Delete from KRA table

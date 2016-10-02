@@ -22,7 +22,6 @@
                 <ul class="dropdown-menu">
                     <li><a href="<?php echo base_url()."form/view_kra";?>">View KRAs</a></li>
                     <li><a href="<?php echo base_url()."form/add_kra";?>">Add KRA</a></li>
-                    <li><a href="<?php echo base_url()."form/add_kpi_category";?>">Add Category</a></li>
                 </ul>
             </li>
         </ul>
