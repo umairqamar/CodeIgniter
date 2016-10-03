@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2016 at 06:59 PM
+-- Generation Time: Oct 03, 2016 at 12:26 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.6
 
@@ -110,8 +110,8 @@ CREATE TABLE `kra` (
 --
 
 INSERT INTO `kra` (`kra_id`, `code`, `description`) VALUES
-(108, '914 483', ''),
-(109, '01', '');
+(108, 'CodeA1', 'Description goes here'),
+(109, 'A2', 'Description goes here');
 
 --
 -- Indexes for dumped tables
