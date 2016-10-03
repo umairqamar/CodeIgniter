@@ -44,12 +44,12 @@ class Form extends CI_Controller {
 
                 $this->My_model->update_kpi($id,$db_data);
 
-                $this->session->set_flashdata('message', 'Record added successfully');
-                redirect('kpi/edit_kpi');
+                $this->session->set_flashdata('message', 'Record edited successfully');
+                redirect('form/view_kpi');
             }
             else{
                 $this->session->set_flashdata('error', validation_errors());
-                redirect('kpi/edit_kpi');
+                redirect('form/view_kpi');
             }
 
 
@@ -223,7 +223,7 @@ class Form extends CI_Controller {
 
                 $this->My_model->update_kra($id,$db_data);
 
-                $this->session->set_flashdata('message', 'Record added successfully');
+                $this->session->set_flashdata('message', 'Record edited successfully');
                 redirect('form/view_kra');
 
             }
