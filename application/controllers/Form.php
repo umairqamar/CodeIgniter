@@ -210,9 +210,30 @@ class Form extends CI_Controller {
     public function edit_kra($id){
         $data = array();
         $data['title'] = "Edit KRA";
-        $data['kra'] = $this->My_model->get_kra_where($id);
-        print_r($data);
+        $data['kra'] = $this->My_model->get_single_kra($id);
         $this->load->view('kra/edit_kra',$data);
+
+        //Check if form is submitted by POST
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $this->form_validation->set_rules('code', 'Code', 'required');
+            if ($this->form_validation->run() != FALSE){
+                $db_data = array();
+                $db_data['code'] = $this->input->post('code', TRUE);
+                $db_data['description'] = $this->input->post('description', TRUE);
+
+                $this->My_model->update_kra($id,$db_data);
+
+                $this->session->set_flashdata('message', 'Record added successfully');
+                redirect('form/view_kra');
+
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('form/view_kra');
+            }
+
+
+        }
     }
 
     //This will delete KRA
@@ -222,12 +243,14 @@ class Form extends CI_Controller {
         redirect('form/view_kra');
     }
 
-    //This will delete a signle KPI in a KRA
+    //This will delete a single KPI in a KRA
     public function delete_kpi_kra($kra,$kpi){
         $this->My_model->delete_kpi_kra($kra,$kpi);
         $this->session->set_flashdata('message', 'Record deleted successfully');
         redirect('form/detail_kra/'.$kra);
     }
+
+    
 
     
 }

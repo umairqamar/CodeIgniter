@@ -92,8 +92,6 @@ class My_model extends CI_Model {
 
     }
 
-   
-
     //This will delete a KRA
     public function delete_kra($id){
         //Delete from KRA table
@@ -112,6 +110,22 @@ class My_model extends CI_Model {
         $this->db->where('kpi', $kpi);
         $this->db->delete('kpi_kra');
     }
+
+    //This will get single KRA
+    public function get_single_kra($id){
+        $this->db->from('kra');
+        $this->db->where('kra_id',$id);
+        $kra = $this->db->get()->result();
+
+        return $kra = $kra[0];
+    }
+
+    //This will update single KRA
+    public function update_kra($id,$data){
+        $this->db->where('kra_id', $id);
+        $this->db->update("kra",$data);
+    }
+
 
 }
 

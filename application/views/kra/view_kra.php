@@ -46,7 +46,7 @@
 
                                     <td>
                                         <a href="<?php echo site_url("/form/detail_kra/".$u->kra_id) ?>" >Details</a> |
-<!--                                        <a href="--><?php //echo site_url("/form/edit_kra/".$u->kra_id) ?><!--" >Edit</a> |-->
+                                        <a href="<?php echo site_url("/form/edit_kra/".$u->kra_id) ?>" >Edit</a> |
                                         <a href="<?php echo site_url("/form/delete_kra/".$u->kra_id); ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
                                     </td>
                                 </tr>
