@@ -32,6 +32,12 @@
                     ?>
 
                     <?php echo form_open('',array('name' => 'add_data','id' => 'add_data')); ?>
+
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input type="text" class="form-control" id="description" name="description" placeholder="Description">
+                        </div>
+
                         <div class="form-group">
                             <label>Type</label>
                             <select class="form-control" id="type" name="type">

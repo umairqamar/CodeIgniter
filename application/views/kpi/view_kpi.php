@@ -32,6 +32,7 @@
                 <table class="table table-striped">
                 <thead>
                 <tr>
+                    <th>Description</th>
                     <th>Type</th>
                     <th>Level</th>
                     <th>Category</th>
@@ -44,26 +45,8 @@
                 <?php if($kpi->result_id->num_rows > 0){
                     foreach($kpi->result() as $u){ ?>
                         <tr>
-                            <td>
-                                <?php
-                                    switch ($u->type) {
-                                        case "IN":
-                                            echo "Input";
-                                            break;
-                                        case "OP":
-                                            echo "Output";
-                                            break;
-                                        case "PO":
-                                            echo "Process";
-                                            break;
-                                        case "OC":
-                                            echo "Outcome";
-                                            break;
-                                        default:
-                                            echo "--";
-                                    }
-                                ?>
-                            </td>
+                            <td><?php echo $u->kpi_description;?>
+                            <td><?php echo get_type($u->type);?>
                             <td><?php echo $u->level;?></td>
                             <td><?php echo $u->category;?></td>
                             <td><?php echo $u->num;?></td>

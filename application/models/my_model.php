@@ -29,7 +29,7 @@ class My_model extends CI_Model {
     }
 
     public function get_kpi(){
-        $this->db->select('kpi_id,type,level,p_category,num,denom,category,description');
+        $this->db->select('kpi_id,kpi_description,type,level,p_category,num,denom,category,description');
         $this->db->from('kpi');
         $this->db->join('kpi_category', 'kpi.p_category = kpi_category.kpi_cat_id');
 
@@ -37,7 +37,7 @@ class My_model extends CI_Model {
     }
 
     public function get_kpi_where($id){
-        $this->db->select('kpi_id,type,level,p_category,num,denom,category,description');
+        $this->db->select('kpi_id,kpi_description,type,level,p_category,num,denom,category,description');
         $this->db->from('kpi');
         $this->db->join('kpi_category', 'kpi.p_category = kpi_category.kpi_cat_id');
         $this->db->where('kpi_id',$id);

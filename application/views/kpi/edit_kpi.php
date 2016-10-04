@@ -5,7 +5,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Edit: <?php echo $kpi->kpi_id;?></h3>
+                    <h3 class="panel-title">Edit: <?php echo $kpi->kpi_description;?></h3>
                 </div>
                 <div class="panel-body">
 
@@ -31,6 +31,11 @@
                     }
                     ?>
                     <?php echo form_open('form/edit_kpi/'.$kpi->kpi_id, array('name' => 'edit_kpi','id' => 'edit_kpi')); ?>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" id="description" name="description" value="<?php echo $kpi->kpi_description;?>">
+                    </div>
+
                     <div class="form-group">
                         <label>Type</label>
                         <select class="form-control" id="type" name="type">

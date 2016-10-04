@@ -27,7 +27,8 @@ class Form extends CI_Controller {
 
         //Check if form is submitted by POST
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            
+
+            $this->form_validation->set_rules('description', 'Description', 'required');
             $this->form_validation->set_rules('type', 'Type', 'required');
             $this->form_validation->set_rules('level', 'Level', 'required');
             $this->form_validation->set_rules('category', 'Category', 'required');
@@ -36,6 +37,7 @@ class Form extends CI_Controller {
 
             if ($this->form_validation->run() != FALSE){
                 $db_data = array();
+                $db_data['kpi_description'] = $this->input->post('description', TRUE);
                 $db_data['type'] = $this->input->post('type', TRUE);
                 $db_data['level'] = $this->input->post('level', TRUE);
                 $db_data['p_category'] = $this->input->post('category', TRUE);
@@ -78,6 +80,11 @@ class Form extends CI_Controller {
         //Check if form is submitted by POST
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+            $this->form_validation->set_rules('description', 'Description', 'required|is_unique[kpi.kpi_description]|max_length[50]'
+                ,array(
+                    'is_unique'     => 'This %s already exists.'
+                )
+            );
             $this->form_validation->set_rules('type', 'Type', 'required');
             $this->form_validation->set_rules('level', 'Level', 'required');
             $this->form_validation->set_rules('category', 'Category', 'required');
@@ -86,6 +93,7 @@ class Form extends CI_Controller {
 
             if ($this->form_validation->run() != FALSE){
                 $db_data = array();
+                $db_data['kpi_description'] = $this->input->post('description', TRUE);
                 $db_data['type'] = $this->input->post('type', TRUE);
                 $db_data['level'] = $this->input->post('level', TRUE);
                 $db_data['p_category'] = $this->input->post('category', TRUE);

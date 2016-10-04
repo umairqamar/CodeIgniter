@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2016 at 12:26 PM
+-- Generation Time: Oct 04, 2016 at 02:02 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.6
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `kpi` (
   `kpi_id` int(11) NOT NULL,
+  `kpi_description` varchar(155) NOT NULL,
   `type` varchar(2) NOT NULL COMMENT 'IN=Input,OP=Output,PO=Process,OC=Outcome',
   `level` int(1) NOT NULL,
   `p_category` varchar(4) NOT NULL,
@@ -39,12 +40,8 @@ CREATE TABLE `kpi` (
 -- Dumping data for table `kpi`
 --
 
-INSERT INTO `kpi` (`kpi_id`, `type`, `level`, `p_category`, `num`, `denom`) VALUES
-(1, 'IN', 0, '25', '123', '456'),
-(2, 'OP', 1, '25', '564', '123'),
-(3, 'OC', 2, '25', '456', 'asfasf'),
-(4, 'OP', 0, '25', '1', 'asfasf'),
-(5, 'IN', 1, '25', '45677777777777', '456');
+INSERT INTO `kpi` (`kpi_id`, `kpi_description`, `type`, `level`, `p_category`, `num`, `denom`) VALUES
+(6, 'KPI 2', 'IN', 0, '25', 'a', 'a');
 
 -- --------------------------------------------------------
 
@@ -78,21 +75,6 @@ CREATE TABLE `kpi_kra` (
   `kpi` int(11) NOT NULL COMMENT 'Foreign key,Multiple values'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Relationship between KRA and KPI';
 
---
--- Dumping data for table `kpi_kra`
---
-
-INSERT INTO `kpi_kra` (`id`, `kra`, `kpi`) VALUES
-(79, 108, 1),
-(80, 108, 2),
-(81, 108, 3),
-(82, 108, 4),
-(84, 108, 0),
-(85, 108, 0),
-(86, 109, 1),
-(87, 109, 0),
-(88, 109, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -104,14 +86,6 @@ CREATE TABLE `kra` (
   `code` text,
   `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `kra`
---
-
-INSERT INTO `kra` (`kra_id`, `code`, `description`) VALUES
-(108, 'CodeA1', 'Description goes here'),
-(109, 'A2', 'Description goes here');
 
 --
 -- Indexes for dumped tables
@@ -149,7 +123,7 @@ ALTER TABLE `kra`
 -- AUTO_INCREMENT for table `kpi`
 --
 ALTER TABLE `kpi`
-  MODIFY `kpi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `kpi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `kpi_category`
 --
