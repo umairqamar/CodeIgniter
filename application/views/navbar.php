@@ -7,7 +7,7 @@
 
             <li><a href="<?php echo base_url();?>">Home</a></li>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="<?php echo base_url()."/form/view_kpi";?>">KPI
+                <a class="dropdown-toggle" data-toggle="dropdown" href="<?php echo base_url()."form/view_kpi";?>">KPI
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="<?php echo base_url()."form/view_kpi";?>">View KPIs</a></li>
@@ -17,7 +17,7 @@
             </li>
 
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="<?php echo base_url()."/form/view_kra";?>">KRA
+                <a class="dropdown-toggle" data-toggle="dropdown" href="<?php echo base_url()."form/view_kra";?>">KRA
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="<?php echo base_url()."form/view_kra";?>">View KRAs</a></li>

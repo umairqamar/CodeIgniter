@@ -84,8 +84,9 @@ class My_model extends CI_Model {
 
         //$this->db->select('kpi_id,kpi_description,type,level,p_category,num,denom,category,description');
         $this->db->from('kra');
-        //$this->db->join('kpi_kra', 'kpi_kra.kra = kra.kra_id');
-        //$this->db->join('kpi', 'kpi_kra.kpi = kpi.kpi_id');
+        $this->db->join('kpi_kra', 'kpi_kra.kra = kra.kra_id');
+        $this->db->join('kpi', 'kpi_kra.kpi = kpi.kpi_id');
+        $this->db->order_by("code", "asc");
         //$this->db->where('kra_id',$id);
         return $this->db->get();
 

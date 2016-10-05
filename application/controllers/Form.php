@@ -204,8 +204,6 @@ class Form extends CI_Controller {
         $data = array();
         $data['title'] = "View KRA";
         $data['kra'] = $this->My_model->get_kra();
-        //print_r($data['kra']);
-
 
         $this->load->view('kra/view_kra',$data);
     }
@@ -269,7 +267,7 @@ class Form extends CI_Controller {
     public function delete_kpi_kra($kra,$kpi){
         $this->My_model->delete_kpi_kra($kra,$kpi);
         $this->session->set_flashdata('message', 'Record deleted successfully');
-        redirect('form/detail_kra/'.$kra);
+        redirect('form/view_kra/'.$kra);
     }
 
     
