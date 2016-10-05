@@ -50,7 +50,8 @@
                             if($kpi->result_id->num_rows > 0){
                                 foreach($kpi->result() as $u){ ?>
                                     <option value="<?php echo $u->kpi_id;?>">
-                                        <?php echo "Id:".$u->kpi_id. "-" .$u->type. "- Level:" .$u->level."-".$u->category;?>
+<!--                                        --><?php //echo "Id:".$u->kpi_id. "-" .$u->type. "- Level:" .$u->level."-".$u->category;?>
+                                        <?php echo $u->kpi_description;?>
                                     </option>
                                     <?php
                                 }

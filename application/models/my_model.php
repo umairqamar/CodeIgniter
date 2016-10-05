@@ -36,6 +36,8 @@ class My_model extends CI_Model {
         return  $this->db->get();
     }
 
+    
+
     public function get_kpi_where($id){
         $this->db->select('kpi_id,kpi_description,type,level,p_category,num,denom,category,description');
         $this->db->from('kpi');
@@ -59,23 +61,40 @@ class My_model extends CI_Model {
 
     public function add_kra($data,$kra){
 
+        $this->db->trans_start();
         $this->db->insert("kra",$data);
 
         $insert_id = $this->db->insert_id();
-        //print_r($kra);exit;
+
         $kpi_list = $kra['kpi'];
-        for ($i=0; $i<=count($kra,COUNT_RECURSIVE);$i++){
-            $this->db->query( "INSERT INTO kpi_kra (kra, kpi) VALUES ('$insert_id', '$kpi_list[$i]')");
+        for ($i=0; $i < count(array_flatten($kra)) ; $i++){
+            $this->db->set('kra', $insert_id);
+            $this->db->set('kpi', $kpi_list[$i]);
+            $this->db->insert('kpi_kra');
         }
+        $this->db->trans_complete();
+
+
 
 
 
     }
     
     public function get_kra(){
+
+        //$this->db->select('kpi_id,kpi_description,type,level,p_category,num,denom,category,description');
         $this->db->from('kra');
-        return  $this->db->get();
+        //$this->db->join('kpi_kra', 'kpi_kra.kra = kra.kra_id');
+        //$this->db->join('kpi', 'kpi_kra.kpi = kpi.kpi_id');
+        //$this->db->where('kra_id',$id);
+        return $this->db->get();
+
+
+
+
     }
+
+
 
     public function get_kra_where($id){
         //$this->db->select('kra_id,code,description,kpi_id,type,level,p_category,num,denom');
@@ -120,10 +139,40 @@ class My_model extends CI_Model {
         return $kra = $kra[0];
     }
 
-    //This will update single KRA
-    public function update_kra($id,$data){
+
+    public function update_kra($id,$db_data,$kra){
+
+        $this->db->trans_start();
+        $this->db->select('kra');
         $this->db->where('kra_id', $id);
-        $this->db->update("kra",$data);
+        $this->db->update("kra",$db_data);
+
+        //Delete from kpi_kra records
+        $this->db->where('kra', $id);
+        $this->db->delete('kpi_kra');
+
+
+        $kpi_list = $kra['kpi'];
+        for ($i=0; $i < count(array_flatten($kra)) ; $i++){
+            $this->db->set('kra', $id);
+            $this->db->set('kpi', $kpi_list[$i]);
+            $this->db->insert('kpi_kra');
+        }
+
+        $this->db->trans_complete();
+    }
+    
+    //This will return array of KPIs in a KRA
+    public function get_kpi_list($kra){
+        $this->db->select('kpi');
+        $this->db->from('kra');
+        $this->db->join('kpi_kra', 'kpi_kra.kra = kra.kra_id');
+        $this->db->where('kra_id',$kra);
+        $kpi_list = $this->db->get()->result_array();
+
+        return $kpi_list ;
+
+        
     }
 
 

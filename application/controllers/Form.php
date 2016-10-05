@@ -8,12 +8,14 @@ class Form extends CI_Controller {
         parent::__construct();
         $this->load->model('My_model');
         $this->load->helper('general_helper');
+        $this->load->helper('array');
+        $this->load->library('table');
     }
 
     public function index()
     {
-        
-        $this->view_kra();
+       $this->view_kra();
+
 
     }
 
@@ -61,7 +63,7 @@ class Form extends CI_Controller {
     public function delete_kpi($id){
         $this->My_model->delete_kpi($id);
         $this->session->set_flashdata('message', 'Record deleted successfully');
-        redirect('form/delete_kpi');
+        redirect('form/view_kpi');
     }
 
     public function view_kpi(){
@@ -202,6 +204,9 @@ class Form extends CI_Controller {
         $data = array();
         $data['title'] = "View KRA";
         $data['kra'] = $this->My_model->get_kra();
+        //print_r($data['kra']);
+
+
         $this->load->view('kra/view_kra',$data);
     }
     
@@ -219,17 +224,26 @@ class Form extends CI_Controller {
         $data = array();
         $data['title'] = "Edit KRA";
         $data['kra'] = $this->My_model->get_single_kra($id);
+        $data['kpi_list'] = $this->My_model->get_kpi();
+        $data['selected_kpi'] = $this->My_model->get_kpi_list($id);
+ 
         $this->load->view('kra/edit_kra',$data);
 
         //Check if form is submitted by POST
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $this->form_validation->set_rules('code', 'Code', 'required');
+            $this->form_validation->set_rules('code', 'Code', 'required|max_length[50]');
+
+
             if ($this->form_validation->run() != FALSE){
-                $db_data = array();
+                
                 $db_data['code'] = $this->input->post('code', TRUE);
                 $db_data['description'] = $this->input->post('description', TRUE);
 
-                $this->My_model->update_kra($id,$db_data);
+                $db_kra = array();
+                $db_kra['kpi'] = $this->input->post('kpi', TRUE);
+                //print_r($db_kra);exit;
+
+                $this->My_model->update_kra($id,$db_data,$db_kra);
 
                 $this->session->set_flashdata('message', 'Record edited successfully');
                 redirect('form/view_kra');

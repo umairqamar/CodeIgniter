@@ -31,40 +31,23 @@
                         <?php
                     }
                     ?>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Code</th>
-                            <th>Description</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php if($kra->result_id->num_rows > 0){
-                            foreach($kra->result() as $u){ ?>
-                                <tr>
-                                    <td><?php echo $u->code;?></td>
-                                    <td><?php echo $u->description;?></td>
+                    <?php if($kra->result_id->num_rows > 0){
 
-                                    <td>
-                                        <a href="<?php echo site_url("/form/detail_kra/".$u->kra_id) ?>" >Details</a> |
-                                        <a href="<?php echo site_url("/form/edit_kra/".$u->kra_id) ?>" >Edit</a> |
-                                        <a href="<?php echo site_url("/form/delete_kra/".$u->kra_id); ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <?php  ;?>
-                                </tr>
-
-
-                                <?php
+                        foreach($kra->result() as $u){
+                            //echo $u->code;
+                            $h1 = "";
+                            if($h1 != $u->code) {
+                                echo "<h1>" . $u->code . ":</h1>\n";
+                                $h1 = $u->code;
                             }
+
                         }
 
-                        ?>
-                        </tbody>
-                    </table>
-<!--                    <button onclick="goBack()" name="btn_back"  class="btn btn-default pull-left">Back</button>-->
+                    }
+
+
+                    ?>
+                    <!--                    <button onclick="goBack()" name="btn_back"  class="btn btn-default pull-left">Back</button>-->
                 </div>
 
 
