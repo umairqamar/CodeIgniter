@@ -45,8 +45,8 @@
 
                     <div class="form-group">
                         <label>KRA</label>
-                        <p class="help-block">Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p>
-                        <select class="form-control" id="kpi[]" name="kpi[]" multiple required>
+<!--                        <p class="help-block">Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p>-->
+                        <select class="kpi_list form-control" id="kpi[]" name="kpi[]" multiple="multiple" required>
                             <?php
                             if($kpi_list->result_id->num_rows > 0){
                                 foreach($kpi_list->result() as $u){ ?>
@@ -71,9 +71,15 @@
 
     </div>
 </div>
-<script>
+
+<?php include(VIEWPATH."_footer.php") ?>
+<script type="text/javascript">
     function goBack() {
         window.history.back();
     }
+
+    $('.kpi_list').select2({
+        placeholder: 'Select KPIs'
+    });
 </script>
-<?php include(VIEWPATH."_footer.php") ?>
+

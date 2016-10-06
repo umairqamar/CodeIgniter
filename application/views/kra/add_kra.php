@@ -1,4 +1,5 @@
 <?php include(VIEWPATH."_header.php") ?>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 " >
@@ -43,9 +44,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label>KRA</label>
-                        <p class="help-block">Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p>
-                        <select class="form-control" id="kpi[]" name="kpi[]" multiple required>
+                        <label>KPI</label>
+<!--                        <p class="help-block">Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p>-->
+                        <select class="kpi_list form-control" id="kpi[]" name="kpi[]"   multiple="multiple" required>
                             <?php
                             if($kpi->result_id->num_rows > 0){
                                 foreach($kpi->result() as $u){ ?>
@@ -75,9 +76,15 @@
 
     </div>
 </div>
-<script>
+
+<?php include(VIEWPATH."_footer.php") ?>
+<script type="text/javascript">
     function goBack() {
         window.history.back();
     }
+
+    $('.kpi_list').select2({
+        placeholder: 'Select KPIs'
+    });
 </script>
-<?php include(VIEWPATH."_footer.php") ?>
+

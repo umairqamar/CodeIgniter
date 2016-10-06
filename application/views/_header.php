@@ -7,7 +7,10 @@
     <title><?php isset($title) ?: $title = 'Bootstrap Form';echo $title; ?></title>
 
     <!-- Bootstrap -->
-    <link href="<?php echo base_url();?>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Select2 -->
+    <link href="<?php echo base_url();?>plugins/select2/css/select2.min.css" rel="stylesheet">
     
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

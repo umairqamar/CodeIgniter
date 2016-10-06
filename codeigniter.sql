@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2016 at 10:28 PM
+-- Generation Time: Oct 06, 2016 at 10:52 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.6
 
@@ -92,11 +92,6 @@ INSERT INTO `kpi_kra` (`id`, `kra`, `kpi`) VALUES
 (145, 121, 10),
 (146, 121, 11),
 (147, 121, 12),
-(158, 122, 8),
-(159, 122, 9),
-(160, 122, 10),
-(161, 122, 11),
-(162, 122, 12),
 (168, 124, 8),
 (169, 124, 9),
 (170, 124, 10),
@@ -106,7 +101,9 @@ INSERT INTO `kpi_kra` (`id`, `kra`, `kpi`) VALUES
 (174, 120, 9),
 (175, 120, 10),
 (176, 120, 11),
-(177, 120, 12);
+(177, 120, 12),
+(181, 122, 10),
+(182, 122, 11);
 
 -- --------------------------------------------------------
 
@@ -177,12 +174,12 @@ ALTER TABLE `kpi_category`
 -- AUTO_INCREMENT for table `kpi_kra`
 --
 ALTER TABLE `kpi_kra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 --
 -- AUTO_INCREMENT for table `kra`
 --
 ALTER TABLE `kra`
-  MODIFY `kra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `kra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
