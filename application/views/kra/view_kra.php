@@ -1,6 +1,4 @@
-
 <?php include(VIEWPATH."_header.php") ?>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 " >
@@ -53,6 +51,18 @@
                                     <th>Denominator</th>
                                     <th>Actions</th>
                                 </tr>
+                                <tr>
+                                    <td><?php echo $u->kpi_description;?></td>
+                                    <td><?php echo get_type($u->type);?></td>
+                                    <td><?php echo $u->level;?></td>
+                                    <td><?php echo $u->num;?></td>
+                                    <td><?php echo $u->denom;?></td>
+                                    <td>
+                                        <!--                                    <a href="--><?php //echo site_url("/form/edit_kra/".$k['kra_id']."/".$k['id']) ?><!--" >Edit</a> |-->
+
+                                        <a href="<?php echo site_url("/form/delete_kpi_kra/".$u->kra_id."/".$u->kpi_id); ?>" onclick="return confirm('Are you sure you want to delete this KPI?')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>
+                                    </td>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 <?php
@@ -71,16 +81,9 @@
                                             <a href="<?php echo site_url("/form/delete_kpi_kra/".$u->kra_id."/".$u->kpi_id); ?>" onclick="return confirm('Are you sure you want to delete this KPI?')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>
                                         </td>
                                     </tr>
-
-
                                 <?php
                                 }
-
                                 ?>
-
-
-
-
                                 <?php
                             }
                         }
