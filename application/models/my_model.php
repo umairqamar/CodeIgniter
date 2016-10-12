@@ -79,7 +79,15 @@ class My_model extends CI_Model {
 
 
     }
-    
+
+    //Return details of KRAs
+    public function get_kra_list(){
+        $this->db->from('kra');
+        $this->db->order_by("code", "asc");
+        return $this->db->get();
+    }
+
+    //Return Detailed KRA with list of KPIs in each KRA
     public function get_kra(){
 
         //$this->db->select('kpi_id,kpi_description,type,level,p_category,num,denom,category,description');
@@ -98,16 +106,14 @@ class My_model extends CI_Model {
 
 
     public function get_kra_where($id){
-        //$this->db->select('kra_id,code,description,kpi_id,type,level,p_category,num,denom');
-        $this->db->select('kra_id,kra.code,kra.description,kpi_kra.id,kpi.kpi_id,kpi.`type`,kpi.`level`,kpi.p_category,kpi.num,kpi.denom,kpi_category.category');
         $this->db->from('kra');
         $this->db->join('kpi_kra', 'kpi_kra.kra = kra.kra_id');
-        $this->db->join('kpi', 'kpi.kpi_id = kpi_kra.kpi');
-        $this->db->join('kpi_category', 'kpi.p_category = kpi_category.kpi_cat_id');
-        $this->db->where('kra_id',$id);
-        $kpi = $this->db->get()->result_array();
+        $this->db->join('kpi', 'kpi_kra.kpi = kpi.kpi_id');
+        $this->db->where('kra_id', $id);
+        $this->db->order_by("code", "asc");
 
-        return $kpi;
+        return $this->db->get();
+
         //return $kpi = $kpi[0];
 
     }
@@ -169,7 +175,7 @@ class My_model extends CI_Model {
         $this->db->from('kra');
         $this->db->join('kpi_kra', 'kpi_kra.kra = kra.kra_id');
         $this->db->where('kra_id',$kra);
-        $kpi_list = $this->db->get()->result_array();
+        $kpi_list = $this->db->get();
 
         return $kpi_list ;
 

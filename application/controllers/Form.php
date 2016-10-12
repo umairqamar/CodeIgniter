@@ -14,7 +14,8 @@ class Form extends CI_Controller {
 
     public function index()
     {
-       $this->view_kra();
+     
+       $this->view_kra($id = NULL);
 
 
     }
@@ -200,12 +201,19 @@ class Form extends CI_Controller {
 
     }
     
-    public function view_kra(){
+    public function view_kra($id){
+
         $data = array();
         $data['title'] = "View KRA";
-        $data['kra'] = $this->My_model->get_kra();
+        $data['kra'] = $this->My_model->get_kra_list();
+
+        if (isset($id) && !is_null($id) && is_numeric($id)){
+            $data['kra_detail'] = $this->My_model->get_kra_where($id);
+        }
 
         $this->load->view('kra/view_kra',$data);
+
+
     }
     
     public function detail_kra($id){
@@ -260,7 +268,7 @@ class Form extends CI_Controller {
     public function delete_kra($id){
         $this->My_model->delete_kra($id);
         $this->session->set_flashdata('message', 'Record deleted successfully');
-        redirect('form/view_kra');
+        redirect('form/view_kra/NULL');
     }
 
     //This will delete a single KPI in a KRA
