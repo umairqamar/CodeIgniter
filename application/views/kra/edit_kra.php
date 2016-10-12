@@ -50,7 +50,7 @@
                             <?php
                             if($kpi_list->result_id->num_rows > 0){
                                 foreach($kpi_list->result() as $u){ ?>
-                                    <option value="<?php echo $u->kpi_id;?> "  <?php if (in_array_r($u->kpi_id, $selected_kpi)){echo "selected";} ?> ><?php echo $u->kpi_description;?>  </option>
+                                    <option value="<?php echo $u->kpi_id;?>"<?php if (in_array_r($u->kpi_id, $selected_kpi->result_array())){echo "selected";} ?>><?php echo $u->kpi_description;?>  </option>
                                     <?php
                                 }
                             }

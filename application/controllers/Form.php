@@ -252,12 +252,12 @@ class Form extends CI_Controller {
                 $this->My_model->update_kra($id,$db_data,$db_kra);
 
                 $this->session->set_flashdata('message', 'Record edited successfully');
-                redirect('form/view_kra');
+                redirect('form/view_kra/NULL');
 
             }
             else{
                 $this->session->set_flashdata('error', validation_errors());
-                redirect('form/view_kra');
+                redirect('form/view_kra/NULL');
             }
 
 

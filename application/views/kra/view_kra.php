@@ -54,29 +54,30 @@
 
 
                     <?php if($this->uri->segment(3) && is_numeric($this->uri->segment(3)) && !is_null($this->uri->segment(3))){ ?>
-                        <h4><?php echo $kra_detail->result()['0']->code;?></h4>
-                        <p class="help-block"><?php echo $kra_detail->result()['0']->description;?></p>
-                        <table class="table table">
 
-                            <?php if($kra_detail->result_id->num_rows > 0){
-                                foreach($kra_detail->result() as $u){ ?>
-                                    <tr>
-                                        <td><?php echo $u->kpi_description;?></td>
-                                        <td><?php echo get_type($u->type);?></td>
-                                        <td><?php echo $u->level;?></td>
-                                        <td><?php echo $u->num;?></td>
-                                        <td><?php echo $u->denom;?></td>
-                                        <td>
-                                            <a href="<?php echo site_url("/form/delete_kpi_kra/".$u->kra_id."/".$u->kpi_id); ?>" onclick="return confirm('Are you sure you want to delete this KPI?')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                                ?>
+                        <?php if($kra_detail->result_id->num_rows > 0){ ?>
+                            <h4><?php echo $kra_detail->result()['0']->code;?></h4>
+                            <p class="help-block"><?php echo $kra_detail->result()['0']->description;?></p>
+                            <table class="table table">
+
+                            <?php
+                            foreach($kra_detail->result() as $u){ ?>
+                                <tr>
+                                    <td><?php echo $u->kpi_description;?></td>
+                                    <td><?php echo get_type($u->type);?></td>
+                                    <td><?php echo $u->level;?></td>
+                                    <td><?php echo $u->num;?></td>
+                                    <td><?php echo $u->denom;?></td>
+                                    <td>
+                                        <a href="<?php echo site_url("/form/delete_kpi_kra/".$u->kra_id."/".$u->kpi_id); ?>" onclick="return confirm('Are you sure you want to delete this KPI?')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>
+                                    </td>
+                                </tr>
                                 <?php
                             }
-
                             ?>
+                        <?php
+                        } ?>
+
                             </tbody>
                         </table>
 
