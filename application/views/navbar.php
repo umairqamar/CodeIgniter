@@ -20,11 +20,21 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="<?php echo base_url()."form/view_kra";?>">KRA
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="<?php echo base_url()."form/view_kra/NULL";?>">View KRAs</a></li>
+                    <li><a href="<?php echo base_url()."form/view_kra/";?>">View KRAs</a></li>
                     <li><a href="<?php echo base_url()."form/add_kra";?>">Add KRA</a></li>
                 </ul>
             </li>
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="<?php echo base_url()."form/view_employee";?>">Employee
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="<?php echo base_url()."form/view_employee/";?>">View Employees</a></li>
+                    <li><a href="<?php echo base_url()."form/add_employee";?>">Add Employee</a></li>
+                </ul>
+            </li>
         </ul>
+
     </div>
 </nav>
 <?php

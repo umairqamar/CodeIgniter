@@ -56,3 +56,6 @@ $route['translate_uri_dashes'] = FALSE;
 $route['form'] = 'form';
 $route['add_data'] = 'form/add_data';
 $route['add_category'] = 'form/add_category';
+
+$route['form/view_kra'] = 'form/view_kra/NULL';
+$route['form/view_employee'] = 'form/view_employee/NULL';

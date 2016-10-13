@@ -5,7 +5,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">View KRA</h3>
+                    <h3 class="panel-title">View Employee</h3>
                 </div>
                 <div class="panel-body">
                     <?php
@@ -30,19 +30,19 @@
                     }
                     ?>
 
-                    <label>Choose KRA: </label>
+                    <label>Choose Employee: </label>
 
                     <div class="btn-group">
                         <!-- Single button -->
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Select KRA <span class="caret"></span>
+                                Select Employee <span class="caret"></span>
                             </button>
                         <ul class="dropdown-menu">
                             <?php
-                             if ($kra->result_id->num_rows >0){
-                                 foreach ($kra->result() as $k) { ?>
-                                     <li><a href="<?php echo site_url("/form/view_kra/".$k->kra_id) ?>"><?php echo $k->code?></a></li>
+                             if ($employee->result_id->num_rows >0){
+                                 foreach ($employee->result() as $k) { ?>
+                                     <li><a href="<?php echo site_url("/form/view_employee/".$k->employee_id) ?>"><?php echo $k->name?></a></li>
                                  <?php
                                  }
                              }
@@ -55,21 +55,22 @@
 
                     <?php if($this->uri->segment(3) && is_numeric($this->uri->segment(3)) && !is_null($this->uri->segment(3))){ ?>
 
-                        <?php if($kra_detail->result_id->num_rows > 0){ ?>
-                            <h4><?php echo $kra_detail->result()['0']->code;?></h4>
-                            <p class="help-block"><?php echo $kra_detail->result()['0']->description;?></p>
+                        <?php if($detail->result_id->num_rows > 0){ ?>
+                            <h4><?php echo $detail->result()['0']->name;?>  <small><?php echo $detail->result()['0']->designation;?></small></h4>
+
+                            <p><span class=" glyphicon glyphicon-envelope" aria-hidden="true"> <?php echo $detail->result()['0']->email;?></span></p>
+
+                            <p><span class="glyphicon glyphicon-phone" aria-hidden="true"> <?php echo $detail->result()['0']->contact_num;?></span></p>
+
                             <table class="table table">
 
                             <?php
-                            foreach($kra_detail->result() as $u){ ?>
+                            foreach($detail->result() as $u){ ?>
                                 <tr>
-                                    <td><?php echo $u->kpi_description;?></td>
-                                    <td><?php echo get_type($u->type);?></td>
-                                    <td><?php echo $u->level;?></td>
-                                    <td><?php echo $u->num;?></td>
-                                    <td><?php echo $u->denom;?></td>
+                                    <td><?php echo $u->code;?></td>
+                                    <td><?php echo $u->description;?></td>
                                     <td>
-                                        <a href="<?php echo site_url("/form/delete_kpi_kra/".$u->kra_id."/".$u->kpi_id); ?>" onclick="return confirm('Are you sure you want to delete this KPI?')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>
+                                        <a href="<?php echo site_url("/form/delete_kra_emp/".$u->employee_id."/".$u->kra_id); ?>" onclick="return confirm('Are you sure you want to delete this KRA from this Employee?')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>
                                     </td>
                                 </tr>
                                 <?php
@@ -82,9 +83,9 @@
                         </table>
 
                         <div class="btn-group pull-right" role="group" >
-                            <a href="<?php echo site_url("/form/add_kra/")?>" type="button" class="btn btn-default">Add KRA</a>
-                            <a href="<?php echo site_url("/form/edit_kra/".$kra_detail->result()['0']->kra_id)?>" type="button" class="btn btn-default">Edit KRA</a>
-                            <a href="<?php echo site_url("/form/delete_kra/".$kra_detail->result()['0']->kra_id)?>" type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this KRA?')">Delete KRA</a>
+                            <a href="<?php echo site_url("/form/add_employee/")?>" type="button" class="btn btn-default">Add Employee</a>
+                            <a href="<?php echo site_url("/form/edit_kra/".$detail->result()['0']->employee_id)?>" type="button" class="btn btn-default">Edit Employee</a>
+                            <a href="<?php echo site_url("/form/delete_kra/".$detail->result()['0']->employee_id)?>" type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this Employee?')">Delete Employee</a>
                         </div>
 
                         <?php

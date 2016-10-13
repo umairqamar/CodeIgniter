@@ -36,8 +36,6 @@ class My_model extends CI_Model {
         return  $this->db->get();
     }
 
-    
-
     public function get_kpi_where($id){
         $this->db->select('kpi_id,kpi_description,type,level,p_category,num,denom,category,description');
         $this->db->from('kpi');
@@ -73,11 +71,6 @@ class My_model extends CI_Model {
             $this->db->insert('kpi_kra');
         }
         $this->db->trans_complete();
-
-
-
-
-
     }
 
     //Return details of KRAs
@@ -98,12 +91,7 @@ class My_model extends CI_Model {
         //$this->db->where('kra_id',$id);
         return $this->db->get();
 
-
-
-
     }
-
-
 
     public function get_kra_where($id){
         $this->db->from('kra');
@@ -146,7 +134,6 @@ class My_model extends CI_Model {
         return $kra = $kra[0];
     }
 
-
     public function update_kra($id,$db_data,$kra){
 
         $this->db->trans_start();
@@ -182,6 +169,41 @@ class My_model extends CI_Model {
         
     }
 
+    public function add_employee($data,$kra){
+        $this->db->trans_start();
+        $this->db->insert("employee",$data);
+
+        $insert_id = $this->db->insert_id();
+
+        $kra_list = $kra['kra'];
+
+        for ($i=0; $i < count(array_flatten($kra)) ; $i++){
+            $this->db->set('employee_id', $insert_id);
+            $this->db->set('kra_id', $kra_list[$i]);
+            $this->db->insert('employee_kra');
+        }
+        $this->db->trans_complete();
+    }
+
+    //Return details of Employees
+    public function get_employee_list(){
+        $this->db->from('employee');
+        $this->db->order_by("employee_id", "asc");
+        return $this->db->get();
+    }
+
+    public function get_employee_where($id){
+        $this->db->from('employee');
+        $this->db->join('employee_kra', 'employee.employee_id = employee_kra.employee_id');
+        $this->db->join('kra', 'employee_kra.kra_id = kra.kra_id');
+        $this->db->where('employee.employee_id', $id);
+        $this->db->order_by("employee.employee_id", "asc");
+
+        return $this->db->get();
+
+        //return $kpi = $kpi[0];
+
+    }
 
 }
 

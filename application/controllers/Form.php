@@ -15,7 +15,7 @@ class Form extends CI_Controller {
     public function index()
     {
      
-       $this->view_kra($id = NULL);
+       $this->add_employee($id = NULL);
 
 
     }
@@ -167,10 +167,7 @@ class Form extends CI_Controller {
         $data['kpi'] = $this->My_model->get_kpi();
         $this->load->view('kra/add_kra',$data);
 
-
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-           
-
             $this->form_validation->set_rules('code', 'Code', 'required|max_length[50]|is_unique[kra.code]'
                 ,array(
                     'is_unique'     => 'This %s already exists.'
@@ -182,13 +179,9 @@ class Form extends CI_Controller {
                 $db_data = array();
                 $db_data['code'] = $this->input->post('code', TRUE);
                 $db_data['description'] = $this->input->post('description', TRUE);
-
                 $db_kra = array();
                 $db_kra['kpi'] = $this->input->post('kpi', TRUE);
-                
                 $this->My_model->add_kra($db_data,$db_kra);
-
-                
 
                 $this->session->set_flashdata('message', 'Record added successfully');
                 redirect('form/add_kra');
@@ -278,6 +271,59 @@ class Form extends CI_Controller {
         redirect('form/view_kra/'.$kra);
     }
 
+
+    public function add_employee(){
+        $data = array();
+        $data['title'] = "Add Employee";
+        $data['kra'] = $this->My_model->get_kra_list();
+        $this->load->view('employee/add',$data);
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $this->form_validation->set_rules('name', 'Name', 'required');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[employee.email]'
+                ,array(
+                    'is_unique'     => 'Employee with %s already exists.'
+                )
+            );
+            $this->form_validation->set_rules('contact', 'Contact Number', 'numeric');
+            //$this->form_validation->set_rules('kra', 'KRA', 'required');
+
+            if ($this->form_validation->run() != FALSE){
+                $db_data = array();
+                $db_data['name'] = $this->input->post('name', TRUE);
+                $db_data['email'] = $this->input->post('email', TRUE);
+                $db_data['designation'] = $this->input->post('designation', TRUE);
+                $db_data['contact_num'] = $this->input->post('contact', TRUE);
+
+
+                $selected_kra = array();
+                $selected_kra['kra'] = $this->input->post('kra', TRUE);
+                $this->My_model->add_employee($db_data,$selected_kra);
+
+                $this->session->set_flashdata('message', 'Record added successfully');
+                redirect('form/add_employee');
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('form/add_employee');
+            }
+        }
+
+    }
+
+    public function view_employee($id){
+        $data = array();
+        $data['title'] = "View Employee";
+        $data['employee'] = $this->My_model->get_employee_list();
+
+        if (isset($id) && !is_null($id) && is_numeric($id)){
+            $data['detail'] = $this->My_model->get_employee_where($id);
+        }
+
+        $this->load->view('employee/view',$data);
+
+    }
     
 
     
