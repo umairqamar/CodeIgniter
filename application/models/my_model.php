@@ -202,6 +202,16 @@ class My_model extends CI_Model {
         return $this->db->get();
         //return $kpi = $kpi[0];
     }
+
+    public function delete_employee($id){
+        //Delete from Employee table
+        $this->db->where('employee_id', $id);
+        if ($this->db->delete('employee')){
+            //Also delete from employee_kra table
+            $this->db->where('employee_id', $id);
+            $this->db->delete('employee_kra');
+        }
+    }
     
     public function delete_kra_emp($emp,$kra){
         $this->db->where('employee_id', $emp);

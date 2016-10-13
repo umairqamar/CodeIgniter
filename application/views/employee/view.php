@@ -84,8 +84,8 @@
 
                         <div class="btn-group pull-right" role="group" >
                             <a href="<?php echo site_url("/form/add_employee/")?>" type="button" class="btn btn-default">Add Employee</a>
-                            <a href="<?php echo site_url("/form/edit_kra/".$detail->result()['0']->employee_id)?>" type="button" class="btn btn-default">Edit Employee</a>
-                            <a href="<?php echo site_url("/form/delete_kra/".$detail->result()['0']->employee_id)?>" type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this Employee?')">Delete Employee</a>
+                            <a href="<?php echo site_url("/form/edit_employee/".$detail->result()['0']->employee_id)?>" type="button" class="btn btn-default">Edit Employee</a>
+                            <a href="<?php echo site_url("/form/delete_employee/".$detail->result()['0']->employee_id)?>" type="button" class="btn btn-default" onclick="return confirm('Are you sure you want to delete this Employee?')">Delete Employee</a>
                         </div>
 
                         <?php
