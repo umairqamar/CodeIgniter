@@ -245,12 +245,12 @@ class Form extends CI_Controller {
                 $this->My_model->update_kra($id,$db_data,$db_kra);
 
                 $this->session->set_flashdata('message', 'Record edited successfully');
-                redirect('form/view_kra/NULL');
+                redirect('form/view_kra/'.$id);
 
             }
             else{
                 $this->session->set_flashdata('error', validation_errors());
-                redirect('form/view_kra/NULL');
+                redirect('form/view_kra/'.$id);
             }
 
 
@@ -335,6 +335,49 @@ class Form extends CI_Controller {
         $this->My_model->delete_kra_emp($emp,$kra);
         $this->session->set_flashdata('message', 'Record deleted successfully');
         redirect('form/view_employee/'.$emp);  
+    }
+    
+    public function edit_employee($id){
+        $data = array();
+        $data['title'] = "Edit Employee";
+        $data['employee'] = $this->My_model->get_single_employee($id);
+        $data['kra_list'] = $this->My_model->get_kra_simple();//print_r($data['kra_list']);exit;
+        $data['selected_kra'] = $this->My_model->get_selected_kra($id);
+
+        $this->load->view('employee/edit',$data);
+
+        //Check if form is submitted by POST
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            
+            $this->form_validation->set_rules('name', 'Name', 'required');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('contact', 'Contact Number', 'numeric');
+
+            if ($this->form_validation->run() != FALSE){
+                $db_data = array();
+                $db_data['name'] = $this->input->post('name', TRUE);
+                $db_data['email'] = $this->input->post('email', TRUE);
+                $db_data['designation'] = $this->input->post('designation', TRUE);
+                $db_data['contact_num'] = $this->input->post('contact', TRUE);
+
+
+                $selected_kra = array();
+                $selected_kra['kra'] = $this->input->post('kra', TRUE);
+                //print_r($db_kra);exit;
+
+                $this->My_model->update_employee($id,$db_data,$selected_kra);
+
+                $this->session->set_flashdata('message', 'Record edited successfully');
+                redirect('form/view_employee/'.$id);
+
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('form/view_employee/'.$id);
+            }
+
+
+        } 
     }
     
 

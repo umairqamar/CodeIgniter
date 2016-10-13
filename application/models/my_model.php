@@ -93,6 +93,14 @@ class My_model extends CI_Model {
 
     }
 
+    public function get_kra_simple(){
+        //$this->db->select('kpi_id,kpi_description,type,level,p_category,num,denom,category,description');
+        $this->db->from('kra');
+//        $this->db->join('kpi_category', 'kpi.p_category = kpi_category.kpi_cat_id');
+
+        return  $this->db->get();
+    }
+
     public function get_kra_where($id){
         $this->db->from('kra');
         $this->db->join('kpi_kra', 'kpi_kra.kra = kra.kra_id');
@@ -217,6 +225,48 @@ class My_model extends CI_Model {
         $this->db->where('employee_id', $emp);
         $this->db->where('kra_id', $kra);
         $this->db->delete('employee_kra');
+    }
+
+    public function get_single_employee($id){
+        $this->db->from('employee');
+        $this->db->where('employee_id',$id);
+        $emp = $this->db->get()->result();
+
+        return $emp = $emp[0];
+    }
+
+    //This will return KRAs in an employee
+    public function get_selected_kra($employee){
+        $this->db->select('kra_id');
+        $this->db->from('employee_kra');
+//        $this->db->join('employee_kra', 'employee_kra.kra_id = kra.kra_id');
+        $this->db->where('employee_kra.employee_id',$employee);
+        $kra_list = $this->db->get();
+
+        return $kra_list ;
+
+
+    }
+
+    public function update_employee($id,$data,$kra){
+        $this->db->trans_start();
+        $this->db->select('employee');
+        $this->db->where('employee_id', $id);
+        $this->db->update("employee",$data);
+
+        //Delete from employee_kra records
+        $this->db->where('employee_id', $id);
+        $this->db->delete('employee_kra');
+
+
+        $kra = $kra['kra'];
+        for ($i=0; $i < count(array_flatten($kra)) ; $i++){
+            $this->db->set('employee_id', $id);
+            $this->db->set('kra_id', $kra[$i]);
+            $this->db->insert('employee_kra');
+        }
+
+        $this->db->trans_complete();
     }
 
 }

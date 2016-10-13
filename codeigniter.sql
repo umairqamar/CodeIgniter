@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2016 at 03:52 PM
+-- Generation Time: Oct 13, 2016 at 07:28 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.6
 
@@ -39,7 +39,7 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employee_id`, `name`, `email`, `designation`, `contact_num`) VALUES
-(1, 'Umair Qamar', 'umairqamar@live.com', 'CEO', '');
+(3, 'Umair Qamar', 'umairqamar@yahoo.com', 'CEO', '03458541454');
 
 -- --------------------------------------------------------
 
@@ -58,11 +58,10 @@ CREATE TABLE `employee_kra` (
 --
 
 INSERT INTO `employee_kra` (`id`, `employee_id`, `kra_id`) VALUES
-(1, 1, 120),
-(2, 1, 121),
-(3, 1, 122),
-(4, 1, 123),
-(5, 1, 124);
+(29, 3, 120),
+(30, 3, 121),
+(31, 3, 122),
+(32, 3, 124);
 
 -- --------------------------------------------------------
 
@@ -143,11 +142,10 @@ INSERT INTO `kpi_kra` (`id`, `kra`, `kpi`) VALUES
 (187, 121, 10),
 (188, 121, 11),
 (189, 121, 12),
-(190, 120, 8),
-(191, 120, 9),
-(192, 120, 10),
-(193, 120, 11),
-(194, 120, 12);
+(195, 120, 8),
+(196, 120, 9),
+(197, 120, 10),
+(198, 120, 11);
 
 -- --------------------------------------------------------
 
@@ -220,12 +218,12 @@ ALTER TABLE `kra`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `employee_kra`
 --
 ALTER TABLE `employee_kra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `kpi`
 --
@@ -240,7 +238,7 @@ ALTER TABLE `kpi_category`
 -- AUTO_INCREMENT for table `kpi_kra`
 --
 ALTER TABLE `kpi_kra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
 --
 -- AUTO_INCREMENT for table `kra`
 --

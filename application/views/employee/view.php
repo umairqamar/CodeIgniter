@@ -67,7 +67,7 @@
                             <?php
                             foreach($detail->result() as $u){ ?>
                                 <tr>
-                                    <td><?php echo $u->code;?></td>
+                                    <td><a href="<?php echo site_url("form/view_kra/").$u->kra_id?>" target="_blank"><?php echo $u->code;?></a></td>
                                     <td><?php echo $u->description;?></td>
                                     <td>
                                         <a href="<?php echo site_url("/form/delete_kra_emp/".$u->employee_id."/".$u->kra_id); ?>" onclick="return confirm('Are you sure you want to delete this KRA from this Employee?')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>
