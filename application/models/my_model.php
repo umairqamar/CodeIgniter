@@ -200,9 +200,13 @@ class My_model extends CI_Model {
         $this->db->order_by("employee.employee_id", "asc");
 
         return $this->db->get();
-
         //return $kpi = $kpi[0];
-
+    }
+    
+    public function delete_kra_emp($emp,$kra){
+        $this->db->where('employee_id', $emp);
+        $this->db->where('kra_id', $kra);
+        $this->db->delete('employee_kra');
     }
 
 }

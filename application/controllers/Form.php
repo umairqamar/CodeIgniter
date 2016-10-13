@@ -325,6 +325,16 @@ class Form extends CI_Controller {
 
     }
     
+    public function delete_employee($id){
+        
+    }
+    
+    public function delete_kra_emp($emp,$kra){
+        $this->My_model->delete_kra_emp($emp,$kra);
+        $this->session->set_flashdata('message', 'Record deleted successfully');
+        redirect('form/view_employee/'.$emp);  
+    }
+    
 
     
 }

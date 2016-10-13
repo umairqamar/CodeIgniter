@@ -58,9 +58,9 @@
                         <?php if($detail->result_id->num_rows > 0){ ?>
                             <h4><?php echo $detail->result()['0']->name;?>  <small><?php echo $detail->result()['0']->designation;?></small></h4>
 
-                            <p><span class=" glyphicon glyphicon-envelope" aria-hidden="true"> <?php echo $detail->result()['0']->email;?></span></p>
+                            <p><span class=" glyphicon glyphicon-envelope" aria-hidden="true"></span> <?php echo $detail->result()['0']->email;?></p>
 
-                            <p><span class="glyphicon glyphicon-phone" aria-hidden="true"> <?php echo $detail->result()['0']->contact_num;?></span></p>
+                            <p><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> <?php echo $detail->result()['0']->contact_num;?></p>
 
                             <table class="table table">
 
