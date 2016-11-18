@@ -8,7 +8,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Add KPI Category</h3>
+                    <h3 class="panel-title">Add KRA Category</h3>
                 </div>
                 <div class="panel-body">
 
@@ -36,7 +36,7 @@
 
 
 
-                    <?php echo form_open('',array('name' => 'add_category','id' => 'add_category')); ?>
+                    <?php echo form_open('',array('name' => 'add_kra_category','id' => 'add_kra_category')); ?>
                     <div class="form-group">
                         <label>Category</label>
                         <input type="text" class="form-control" id="category" name="category" placeholder="Category">
@@ -47,7 +47,7 @@
                         <textarea class="form-control" rows="5" id="description" name="description" placeholder="Category description goes here"></textarea>
                     </div>
                     <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>
-<!--                    <a href="--><?php //echo base_url();?><!--" class="btn btn-default pull-left">Back</a>-->
+                    <!--                    <a href="--><?php //echo base_url();?><!--" class="btn btn-default pull-left">Back</a>-->
                     <button type="submit" name="btn_submit"  class="btn btn-primary pull-right">Submit</button>
                     <?php echo form_close(); ?>
                 </div>

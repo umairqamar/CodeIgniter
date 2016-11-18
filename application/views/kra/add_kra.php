@@ -35,7 +35,22 @@
                     <?php echo form_open('form/add_kra',array('name' => 'add_kra','id' => 'add_kra')); ?>
                     <div class="form-group">
                         <label>Code</label>
-                        <input type="text" class="form-control" id="code" name="code" placeholder="Code">
+                        <input type="text" class="form-control" id="code" name="code" placeholder="Code" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select class="form-control" id="category" name="category" required>
+                            <option value="">Select category</option>
+                            <?php
+                            if($kra_category->result_id->num_rows > 0){
+                                foreach($kra_category->result() as $u){ ?>
+                                    <option value="<?php echo $u->kra_cat_id;?>"><?php echo $u->category;?></option>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -63,8 +78,8 @@
 
 
 
-                    <a href="<?php echo base_url();?>" class="btn btn-default pull-left">Back</a>
-                    <!--                        <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>-->
+<!--                    <a href="--><?php //echo base_url();?><!--" class="btn btn-default pull-left">Back</a>-->
+                    <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>
                     <button type="submit" name="btn_submit"  class="btn btn-primary pull-right">Submit</button>
                     <?php echo form_close(); ?>
 

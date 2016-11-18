@@ -220,6 +220,14 @@ class My_model extends CI_Model {
             $this->db->delete('employee_kra');
         }
     }
+
+    public function deactivate_employee($id){
+        //Delete from Employee table
+        $this->db->where('employee_id', $id);
+        $this->db->set('is_active', '0');
+        $this->db->insert('employee');
+
+    }
     
     public function delete_kra_emp($emp,$kra){
         $this->db->where('employee_id', $emp);

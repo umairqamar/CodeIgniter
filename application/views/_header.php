@@ -9,8 +9,14 @@
     <!-- Bootstrap -->
     <link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Custom styles for this template -->
+    <link href="<?php echo base_url();?>assets/css/justified-nav.css" rel="stylesheet">
+
     <!-- Select2 -->
     <link href="<?php echo base_url();?>plugins/select2/css/select2.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="<?php echo base_url();?>plugins/font-awesome/css/font-awesome.min.css">
     
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -22,5 +28,6 @@
 </head>
 
 <body>
+<div class="container">
 <?php include(VIEWPATH."navbar.php") ?>
 

@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2016 at 07:28 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 7.0.6
+-- Generation Time: Nov 18, 2016 at 06:16 PM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 7.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -29,17 +29,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `employee` (
   `employee_id` int(11) NOT NULL,
   `name` varchar(150) NOT NULL,
+  `contact_num` varchar(150) NOT NULL,
   `email` varchar(150) NOT NULL,
   `designation` varchar(150) NOT NULL,
-  `contact_num` varchar(150) NOT NULL
+  `is_active` tinyint(4) DEFAULT '1' COMMENT '1= active ; 0=inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`employee_id`, `name`, `email`, `designation`, `contact_num`) VALUES
-(3, 'Umair Qamar', 'umairqamar@yahoo.com', 'CEO', '03458541454');
+INSERT INTO `employee` (`employee_id`, `name`, `contact_num`, `email`, `designation`, `is_active`) VALUES
+(3, 'Umair Qamar', '03458541454', 'umairqamar@yahoo.com', 'CEO', 0);
 
 -- --------------------------------------------------------
 
@@ -58,10 +59,10 @@ CREATE TABLE `employee_kra` (
 --
 
 INSERT INTO `employee_kra` (`id`, `employee_id`, `kra_id`) VALUES
-(29, 3, 120),
-(30, 3, 121),
-(31, 3, 122),
-(32, 3, 124);
+(36, 3, 120),
+(37, 3, 121),
+(38, 3, 122),
+(39, 3, 124);
 
 -- --------------------------------------------------------
 
@@ -127,9 +128,6 @@ CREATE TABLE `kpi_kra` (
 --
 
 INSERT INTO `kpi_kra` (`id`, `kra`, `kpi`) VALUES
-(124, 123, 9),
-(125, 123, 10),
-(126, 123, 11),
 (168, 124, 8),
 (169, 124, 9),
 (170, 124, 10),
@@ -167,8 +165,27 @@ INSERT INTO `kra` (`kra_id`, `code`, `description`) VALUES
 (120, 'KRA 01', 'Description for KRA 01'),
 (121, 'KRA 02', 'Description for KRA 02'),
 (122, 'KRA 03', 'Description for KRA 03'),
-(123, 'KRA 04', 'Description for KRA 04'),
 (124, 'KRA 05', 'Description for KRA 05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kra_category`
+--
+
+CREATE TABLE `kra_category` (
+  `kra_cat_id` int(11) NOT NULL,
+  `category` varchar(50) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kra_category`
+--
+
+INSERT INTO `kra_category` (`kra_cat_id`, `category`, `description`) VALUES
+(1, 'KRA Category', 'Description for KRA Category'),
+(2, 'My Category', '456456');
 
 --
 -- Indexes for dumped tables
@@ -211,6 +228,12 @@ ALTER TABLE `kra`
   ADD PRIMARY KEY (`kra_id`);
 
 --
+-- Indexes for table `kra_category`
+--
+ALTER TABLE `kra_category`
+  ADD PRIMARY KEY (`kra_cat_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -218,12 +241,12 @@ ALTER TABLE `kra`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `employee_kra`
 --
 ALTER TABLE `employee_kra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT for table `kpi`
 --
@@ -244,6 +267,11 @@ ALTER TABLE `kpi_kra`
 --
 ALTER TABLE `kra`
   MODIFY `kra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+--
+-- AUTO_INCREMENT for table `kra_category`
+--
+ALTER TABLE `kra_category`
+  MODIFY `kra_cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

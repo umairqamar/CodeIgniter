@@ -69,7 +69,7 @@
 
                         <div class="form-group">
                             <label>Category</label>
-                            <select class="form-control" id="category" name="category">
+                            <select class="form-control" id="category" name="category" required>
                                 <option value="">Select category</option>
                                 <?php
                                 if($kpi_category->result_id->num_rows > 0){
@@ -92,7 +92,7 @@
                             <input type="text" class="form-control" id="denominator" name="denominator" placeholder="Denominator">
                         </div>
 <!--                        <a href="--><?php //echo base_url();?><!--" class="btn btn-default pull-left">Back</a>-->
-<!--                        <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>-->
+                        <button onclick="goBack()" name="btn_submit"  class="btn btn-default pull-left">Back</button>
                         <button type="submit" name="btn_submit"  class="btn btn-primary pull-right">Submit</button>
                     <?php echo form_close(); ?>
 

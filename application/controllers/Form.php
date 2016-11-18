@@ -6,7 +6,10 @@ class Form extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('My_model');
+        //$this->load->model('My_model');
+        $this->load->model('Kpi_model');
+        $this->load->model('Kra_model');
+        $this->load->model('Employee_model');
         $this->load->helper('general_helper');
         $this->load->helper('array');
         $this->load->library('table');
@@ -14,8 +17,9 @@ class Form extends CI_Controller {
 
     public function index()
     {
-     
+        //$this->view_employee();
        $this->add_employee($id = NULL);
+
 
 
     }
@@ -23,8 +27,8 @@ class Form extends CI_Controller {
     public function edit_kpi($id){
         $data = array();
         $data['title'] = "Edit KPI";
-        $data['kpi_category'] = $this->My_model->get_kpi_category();
-        $data['kpi'] = $this->My_model->get_kpi_where($id);
+        $data['kpi_category'] = $this->Kpi_model->get_kpi_category();
+        $data['kpi'] = $this->Kpi_model->get_kpi_where($id);
         $this->load->view('kpi/edit_kpi',$data);
 
 
@@ -47,7 +51,7 @@ class Form extends CI_Controller {
                 $db_data['num'] = $this->input->post('numerator', TRUE);
                 $db_data['denom'] = $this->input->post('denominator', TRUE);
 
-                $this->My_model->update_kpi($id,$db_data);
+                $this->Kpi_model->update_kpi($id,$db_data);
 
                 $this->session->set_flashdata('message', 'Record edited successfully');
                 redirect('form/view_kpi');
@@ -62,7 +66,7 @@ class Form extends CI_Controller {
     }
 
     public function delete_kpi($id){
-        $this->My_model->delete_kpi($id);
+        $this->Kpi_model->delete_kpi($id);
         $this->session->set_flashdata('message', 'Record deleted successfully');
         redirect('form/view_kpi');
     }
@@ -71,8 +75,9 @@ class Form extends CI_Controller {
         
         $data = array();
         $data['title'] = "View KPI";
-        $data['kpi'] = $this->My_model->get_kpi();
-        $this->load->view('kpi/view_kpi',$data);
+        $data['kpi'] = $this->Kpi_model->get_kpi();
+        $this->load->view('kpi/main',$data);
+        //$this->load->view('kpi/view_kpi',$data);
 
         
     }
@@ -103,7 +108,7 @@ class Form extends CI_Controller {
                 $db_data['num'] = $this->input->post('numerator', TRUE);
                 $db_data['denom'] = $this->input->post('denominator', TRUE);
 
-                $this->My_model->add_kpi($db_data);
+                $this->Kpi_model->add_kpi($db_data);
 
                 $this->session->set_flashdata('message', 'Record added successfully');
                 redirect('form/add_kpi');
@@ -117,7 +122,7 @@ class Form extends CI_Controller {
         }
         $data = array();
         $data['title'] = "Add KPI";
-        $data['kpi_category'] = $this->My_model->get_kpi_category();
+        $data['kpi_category'] = $this->Kpi_model->get_kpi_category();
         $this->load->view('kpi/add_kpi',$data);
 
 
@@ -134,6 +139,7 @@ class Form extends CI_Controller {
                     'is_unique'     => 'This %s already exists.'
                 )
                 );
+            $this->form_validation->set_rules('category', 'Category', 'required');
 
             if ($this->form_validation->run() != FALSE){
 
@@ -141,7 +147,7 @@ class Form extends CI_Controller {
                 $db_data['category'] = $this->input->post('category', TRUE);
                 $db_data['description'] = $this->input->post('description', TRUE);
 
-                $this->My_model->add_kpi_category($db_data);
+                $this->Kpi_model->add_kpi_category($db_data);
 
                 $this->session->set_flashdata('message', 'Record added successfully');
                 redirect('form/add_kpi_category');
@@ -156,7 +162,7 @@ class Form extends CI_Controller {
         
         $data = array();
         $data['title'] = "Add KPI Category";
-        $data['kpi_category'] = $this->My_model->get_kpi_category();
+        $data['kpi_category'] = $this->Kpi_model->get_kpi_category();
         $this->load->view('kpi/add_kpi_category',$data);
     }
 
@@ -164,7 +170,8 @@ class Form extends CI_Controller {
 
         $data = array();
         $data['title'] = "Add KRA";
-        $data['kpi'] = $this->My_model->get_kpi();
+        $data['kpi'] = $this->Kpi_model->get_kpi();
+        $data['kra_category'] = $this->Kra_model->get_kra_category();
         $this->load->view('kra/add_kra',$data);
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -173,6 +180,7 @@ class Form extends CI_Controller {
                     'is_unique'     => 'This %s already exists.'
                 )
             );
+
             //$this->form_validation->set_rules('kra', 'KRA', 'required');
 
             if ($this->form_validation->run() != FALSE){
@@ -181,7 +189,7 @@ class Form extends CI_Controller {
                 $db_data['description'] = $this->input->post('description', TRUE);
                 $db_kra = array();
                 $db_kra['kpi'] = $this->input->post('kpi', TRUE);
-                $this->My_model->add_kra($db_data,$db_kra);
+                $this->Kra_model->add_kra($db_data,$db_kra);
 
                 $this->session->set_flashdata('message', 'Record added successfully');
                 redirect('form/add_kra');
@@ -193,18 +201,55 @@ class Form extends CI_Controller {
         }
 
     }
+
+    public function add_kra_category(){
+
+
+        //Check if form is submitted by POST
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $this->form_validation->set_rules('category', 'Category', 'required|is_unique[kra_category.category]|max_length[50]'
+                ,array(
+                    'is_unique'     => 'This %s already exists.'
+                )
+            );
+
+            if ($this->form_validation->run() != FALSE){
+
+                $db_data = array();
+                $db_data['category'] = $this->input->post('category', TRUE);
+                $db_data['description'] = $this->input->post('description', TRUE);
+
+                $this->Kra_model->add_kra_category($db_data);
+
+                $this->session->set_flashdata('message', 'Record added successfully');
+                redirect('form/view_kra');
+
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('form/add_kra_category');
+            }
+
+        }
+
+        $data = array();
+        $data['title'] = "Add KRA Category";
+//        $data['kpi_category'] = $this->Kpi_model->get_kpi_category();
+        $this->load->view('kra/add_kra_category',$data);
+    }
     
     public function view_kra($id){
 
         $data = array();
         $data['title'] = "View KRA";
-        $data['kra'] = $this->My_model->get_kra_list();
+        $data['kra'] = $this->Kra_model->get_kra_list();
 
         if (isset($id) && !is_null($id) && is_numeric($id)){
-            $data['kra_detail'] = $this->My_model->get_kra_where($id);
+            $data['kra_detail'] = $this->Kra_model->get_kra_where($id);
         }
 
-        $this->load->view('kra/view_kra',$data);
+        $this->load->view('kra/main',$data);
 
 
     }
@@ -213,7 +258,7 @@ class Form extends CI_Controller {
         $data = array();
         $data['title'] = "View KRA";
 
-        $data['kra'] = $this->My_model->get_kra_where($id);
+        $data['kra'] = $this->Kra_model->get_kra_where($id);
         //print_r($data);exit;
         $this->load->view('kra/detail_kra',$data);
         
@@ -222,9 +267,9 @@ class Form extends CI_Controller {
     public function edit_kra($id){
         $data = array();
         $data['title'] = "Edit KRA";
-        $data['kra'] = $this->My_model->get_single_kra($id);
-        $data['kpi_list'] = $this->My_model->get_kpi();
-        $data['selected_kpi'] = $this->My_model->get_kpi_list($id);
+        $data['kra'] = $this->Kra_model->get_single_kra($id);
+        $data['kpi_list'] = $this->Kpi_model->get_kpi();
+        $data['selected_kpi'] = $this->Kra_model->get_kpi_list($id);
  
         $this->load->view('kra/edit_kra',$data);
 
@@ -242,7 +287,7 @@ class Form extends CI_Controller {
                 $db_kra['kpi'] = $this->input->post('kpi', TRUE);
                 //print_r($db_kra);exit;
 
-                $this->My_model->update_kra($id,$db_data,$db_kra);
+                $this->Kra_model->update_kra($id,$db_data,$db_kra);
 
                 $this->session->set_flashdata('message', 'Record edited successfully');
                 redirect('form/view_kra/'.$id);
@@ -259,14 +304,14 @@ class Form extends CI_Controller {
 
     //This will delete KRA
     public function delete_kra($id){
-        $this->My_model->delete_kra($id);
+        $this->Kra_model->delete_kra($id);
         $this->session->set_flashdata('message', 'Record deleted successfully');
         redirect('form/view_kra/NULL');
     }
 
     //This will delete a single KPI in a KRA
     public function delete_kpi_kra($kra,$kpi){
-        $this->My_model->delete_kpi_kra($kra,$kpi);
+        $this->Kra_model->delete_kpi_kra($kra,$kpi);
         $this->session->set_flashdata('message', 'Record deleted successfully');
         redirect('form/view_kra/'.$kra);
     }
@@ -275,7 +320,7 @@ class Form extends CI_Controller {
     public function add_employee(){
         $data = array();
         $data['title'] = "Add Employee";
-        $data['kra'] = $this->My_model->get_kra_list();
+        $data['kra'] = $this->Kra_model->get_kra_list();
         $this->load->view('employee/add',$data);
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -299,14 +344,14 @@ class Form extends CI_Controller {
 
                 $selected_kra = array();
                 $selected_kra['kra'] = $this->input->post('kra', TRUE);
-                $this->My_model->add_employee($db_data,$selected_kra);
+                $this->Employee_model->add_employee($db_data,$selected_kra);
 
                 $this->session->set_flashdata('message', 'Record added successfully');
-                redirect('form/add_employee');
+                redirect('form/view_employee');
             }
             else{
                 $this->session->set_flashdata('error', validation_errors());
-                redirect('form/add_employee');
+                redirect('form/view_employee');
             }
         }
 
@@ -315,24 +360,26 @@ class Form extends CI_Controller {
     public function view_employee($id){
         $data = array();
         $data['title'] = "View Employee";
-        $data['employee'] = $this->My_model->get_employee_list();
+        $data['employee'] = $this->Employee_model->get_employee_list();
 
         if (isset($id) && !is_null($id) && is_numeric($id)){
-            $data['detail'] = $this->My_model->get_employee_where($id);
+            $data['detail'] = $this->Employee_model->get_employee_where($id);
         }
 
-        $this->load->view('employee/view',$data);
+
+        $this->load->view('employee/main',$data);
+//        $this->load->view('employee/view',$data);
 
     }
     
     public function delete_employee($id){
-        $this->My_model->delete_employee($id);
+        $this->Employee_model->delete_employee($id);
         $this->session->set_flashdata('message', 'Record deleted successfully');
         redirect('form/view_employee/');
     }
     
     public function delete_kra_emp($emp,$kra){
-        $this->My_model->delete_kra_emp($emp,$kra);
+        $this->Employee_model->delete_kra_emp($emp,$kra);
         $this->session->set_flashdata('message', 'Record deleted successfully');
         redirect('form/view_employee/'.$emp);  
     }
@@ -340,9 +387,9 @@ class Form extends CI_Controller {
     public function edit_employee($id){
         $data = array();
         $data['title'] = "Edit Employee";
-        $data['employee'] = $this->My_model->get_single_employee($id);
-        $data['kra_list'] = $this->My_model->get_kra_simple();//print_r($data['kra_list']);exit;
-        $data['selected_kra'] = $this->My_model->get_selected_kra($id);
+        $data['employee'] = $this->Employee_model->get_single_employee($id);
+        $data['kra_list'] = $this->Kra_model->get_kra_simple();//print_r($data['kra_list']);exit;
+        $data['selected_kra'] = $this->Employee_model->get_selected_kra($id);
 
         $this->load->view('employee/edit',$data);
 
@@ -365,7 +412,7 @@ class Form extends CI_Controller {
                 $selected_kra['kra'] = $this->input->post('kra', TRUE);
                 //print_r($db_kra);exit;
 
-                $this->My_model->update_employee($id,$db_data,$selected_kra);
+                $this->Employee_model->update_employee($id,$db_data,$selected_kra);
 
                 $this->session->set_flashdata('message', 'Record edited successfully');
                 redirect('form/view_employee/'.$id);
@@ -379,7 +426,17 @@ class Form extends CI_Controller {
 
         } 
     }
-    
+
+    public function deactivate_employee($id){
+        $this->Employee_model->deactivate_employee($id);
+        $this->session->set_flashdata('message', 'User deactivated successfully');
+        redirect('form/view_employee/'.$id);
+    }
+    public function activate_employee($id){
+        $this->Employee_model->activate_employee($id);
+        $this->session->set_flashdata('message', 'User activated successfully');
+        redirect('form/view_employee/'.$id);
+    }
 
     
 }
