@@ -54,10 +54,23 @@
 
 
                     <?php if($this->uri->segment(3) && is_numeric($this->uri->segment(3)) && !is_null($this->uri->segment(3))){ ?>
-                        <?php if($detail->result_id->num_rows > 0){ ?>
-                            <h4><?php echo $detail->result()['0']->name;?>  <small><?php echo $detail->result()['0']->designation;?></small></h4>
-                            <p><i class="fa fa-envelope-o" aria-hidden="true"></i> <?php echo $detail->result()['0']->email;?></p>
-                            <p><i class="fa fa-phone" aria-hidden="true"></i> <?php echo $detail->result()['0']->contact_num;?></p>
+                        <?php if($detail->result_id->num_rows > 0){
+                            $result = $detail->result()['0'];
+                         ?>
+                            <p>CNIC: <?php echo $result->cnic;?></p>
+                            <p>Name: <?php echo $result->name;?></p>
+                            <p>Father/Husband name: <?php echo $result->father_name;?></p>
+                            <p>Cell: <?php echo $result->phone_cell;?></p>
+                            <p>Landline: <?php echo $result->phone_land;?></p>
+                            <p>Email: <?php echo $result->email;?></p>
+                            <p>Date of Birth: <?php echo $result->dob;?></p>
+                            <p>NTN(if any): <?php echo $result->ntn;?></p>
+                            <p>Maritial Status: <?php echo maritial_status($result->maritial_status);?></p>
+                            <p>Permanent Address: <?php echo $result->address_perm;?></p>
+                            <p>Present Address: <?php echo $result->address_present;?></p>
+                            <p>Emegency Contact: <?php echo $result->emergency_contact;?></p>
+
+
                             <p>Status: <?php echo $detail->result()['0']->is_active ==1 ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>';?></p>
 
                             <table class="table table">
