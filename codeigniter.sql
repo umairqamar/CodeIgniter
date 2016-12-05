@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2016 at 06:16 PM
+-- Generation Time: Dec 05, 2016 at 11:55 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -28,10 +28,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `employee` (
   `employee_id` int(11) NOT NULL,
+  `cnic` varchar(20) DEFAULT NULL,
   `name` varchar(150) NOT NULL,
-  `contact_num` varchar(150) NOT NULL,
+  `father_name` varchar(150) NOT NULL COMMENT 'Father/Husband Name',
+  `phone_cell` varchar(150) NOT NULL,
+  `phone_land` varchar(150) NOT NULL,
   `email` varchar(150) NOT NULL,
-  `designation` varchar(150) NOT NULL,
+  `dob` date NOT NULL,
+  `ntn` varchar(50) NOT NULL,
+  `maritial_status` tinyint(1) NOT NULL COMMENT '0= single 1= married',
+  `addtess_perm` varchar(200) NOT NULL,
+  `address_present` varchar(200) NOT NULL,
+  `emergency_contact` varchar(200) NOT NULL,
   `is_active` tinyint(4) DEFAULT '1' COMMENT '1= active ; 0=inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -39,8 +47,8 @@ CREATE TABLE `employee` (
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`employee_id`, `name`, `contact_num`, `email`, `designation`, `is_active`) VALUES
-(3, 'Umair Qamar', '03458541454', 'umairqamar@yahoo.com', 'CEO', 0);
+INSERT INTO `employee` (`employee_id`, `cnic`, `name`, `father_name`, `phone_cell`, `phone_land`, `email`, `dob`, `ntn`, `maritial_status`, `addtess_perm`, `address_present`, `emergency_contact`, `is_active`) VALUES
+(3, NULL, 'Umair Qamar', '', '03458541454', '', 'umairqamar@yahoo.com', '0000-00-00', '', 0, '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -241,7 +249,7 @@ ALTER TABLE `kra_category`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `employee_kra`
 --
