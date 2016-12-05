@@ -20,6 +20,20 @@ function get_type($type){
     }
 }
 
+function maritial_status($code){
+    $CI =& get_instance();
+    switch ($code) {
+        case 0:
+            return "Single";
+            break;
+        case 1:
+            return "Married";
+            break;
+        default:
+            return "--";
+    }
+}
+
 function array_reindex($array) {
     if(is_array($array)) {
         return array_map('array_reindex', array_values($array));
