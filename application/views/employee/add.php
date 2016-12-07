@@ -33,8 +33,19 @@
 
                     <?php echo form_open('form/add_employee',array('name' => 'add_employee','id' => 'add_employee')); ?>
                     <div class="form-group">
+                        <label>CNIC</label>
+                        <input type="text" class="form-control" id="cnic" name="cnic" placeholder="Enter CNIC" required>
+                    </div>
+
+
+                    <div class="form-group">
                         <label>Name</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Father/Husband Name</label>
+                        <input type="text" class="form-control" id="father_name" name="father_name" placeholder="Enter Father/Husband name" required>
                     </div>
 
                     <div class="form-group">
@@ -43,35 +54,51 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Designation</label>
-                        <input type="text" class="form-control" id="designation" name="designation" placeholder="Enter designation" >
+                        <label>Cell Phone</label>
+                        <input type="text" class="form-control" id="phone_cell" name="phone_cell" placeholder="Enter Cell phone" required="" >
                     </div>
 
 
                     <div class="form-group">
-                        <label>Contact #</label>
-                        <input type="text" class="form-control" id="contact" name="contact" placeholder="Enter Contact number" >
+                        <label>Landline</label>
+                        <input type="text" class="form-control" id="phone_land" name="phone_land" placeholder="Enter Landline number" >
                     </div>
 
+                     <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="text" class="form-control" id="dob" name="dob" placeholder="Enter DOB" >
+                    </div>
 
                     <div class="form-group">
-                        <label>KRAs</label>
-<!--                        <p class="help-block">Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p>-->
-                        <select class="kra_list form-control" id="kra[]" name="kra[]"   multiple="multiple" required>
-                            <?php
-                            if($kra->result_id->num_rows > 0){
-                                foreach($kra->result() as $u){ ?>
-                                    <option value="<?php echo $u->kra_id;?>">
-<!--                                        --><?php //echo "Id:".$u->kpi_id. "-" .$u->type. "- Level:" .$u->level."-".$u->category;?>
-                                        <?php echo $u->code;?>
-                                    </option>
-                                    <?php
-                                }
-                            }
-                            ?>
-                        </select>
+                        <label>NTN#</label>
+                        <input type="text" class="form-control" id="dob" name="dob" placeholder="Enter NTN number (if any)" >
                     </div>
 
+                    <div class="form-group">
+                        <label>Maritial Status</label>
+                        <input type="text" class="form-control" id="maritial_status" name="maritial_status" placeholder="Choose Maritial Status" >
+                    </div>
+
+                    <div class="form-group">
+                        <label>Permanent Address</label>
+                        <input type="text" class="form-control" id="address_perm" name="address_perm" placeholder="Enter Permanent Address" >
+                    </div>
+
+                   <div class="form-group">
+                        <label>Permanent Address</label>
+                        <input type="text" class="form-control" id="address_present" name="address_present" placeholder="Enter Present Address" >
+                    </div>
+
+                     <div class="form-group">
+                        <label>Emergency Contact</label>
+                        <input type="text" class="form-control" id="emergency_contact" name="emergency_contact" placeholder="Enter Emergency Contact" >
+                    </div>
+
+
+
+
+
+                    
 
 
 <!--                    <a href="--><?php //echo base_url();?><!--" class="btn btn-default pull-left">Back</a>-->
