@@ -20,7 +20,7 @@ function get_type($type){
     }
 }
 
-function maritial_status($code){
+function marital_status($code){
     $CI =& get_instance();
     switch ($code) {
         case 0:

@@ -41,6 +41,13 @@ class Employee_model extends CI_Model {
         //return $kpi = $kpi[0];
     }
 
+    public function get_employee_education_where($id){
+        $this->db->from('employee_education');
+        $this->db->where('employee_id',$id);
+        $this->db->order_by("id", "asc");
+        return $this->db->get();
+    }
+
     public function delete_employee($id){
         //Delete from Employee table
         $this->db->where('employee_id', $id);

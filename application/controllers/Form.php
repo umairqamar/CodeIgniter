@@ -365,6 +365,7 @@ class Form extends CI_Controller {
 
         if (isset($id) && !is_null($id) && is_numeric($id)){
             $data['detail'] = $this->Employee_model->get_employee_where($id);
+            $data['education'] = $this->Employee_model->get_employee_education_where($id);
         }
 
 
