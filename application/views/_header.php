@@ -9,6 +9,9 @@
     <!-- Bootstrap -->
     <link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Bootstrap Paper theme -->
+<!--    <link href="--><?php //echo base_url();?><!--assets/css/bootstrap-paper.css" rel="stylesheet">-->
+
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url();?>assets/css/justified-nav.css" rel="stylesheet">
 
