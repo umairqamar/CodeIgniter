@@ -17,6 +17,10 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo base_url();?>plugins/font-awesome/css/font-awesome.min.css">
+
+    <!-- PACE -->
+    <link rel="stylesheet" href="<?php echo base_url();?>plugins/pace/pace.min.css">
+    <script src="<?php echo base_url();?>plugins/pace/pace.min.js"></script>
     
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
