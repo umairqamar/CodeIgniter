@@ -13,7 +13,7 @@
 <!--Input Mask-->
 <script src="<?php echo base_url();?>plugins/inputmask/jquery.inputmask.bundle.min.js"></script>
 <!--Bootstrap Datepicker-->
-<script src="<?php echo base_url();?>plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<!--<script src="--><?php //echo base_url();?><!--plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>-->
 
 
 </body>

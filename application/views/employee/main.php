@@ -1,7 +1,34 @@
 <?php include(VIEWPATH."_header.php") ?>
 <div class="container-fluid">
     <div class="row">
+        <div class="col-md-12 ">
+            <?php
+            $message = $this->session->flashdata('message');
+            $error = $this->session->flashdata('error');
+            if (isset($message)){ ?>
+                <div style="text-align:center;" class="alert alert-success" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    <?php echo $message;?>
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                </div>
+                <?php
+            }
+
+            else if (isset($error)){ ?>
+                <div style="text-align:center;" class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    <?php echo $error; ?>
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12" >
+
+
 
 
             <div class="btn-group">
@@ -41,27 +68,7 @@
                     <h3 class="panel-title">Employee Personal Information</h3>
                 </div>
                 <div class="panel-body">
-                    <?php
-                    $message = $this->session->flashdata('message');
-                    $error = $this->session->flashdata('error');
-                    if (isset($message)){ ?>
-                        <div style="text-align:center;" class="alert alert-success" role="alert">
-                            <span class="glyphicon glyphicon-exclamation-sign"></span>
-                            <?php echo $message;?>
-                            <button type="button" class="close" data-dismiss="alert">x</button>
-                        </div>
-                        <?php
-                    }
 
-                    else if (isset($error)){ ?>
-                        <div style="text-align:center;" class="alert alert-danger" role="alert">
-                            <span class="glyphicon glyphicon-exclamation-sign"></span>
-                            <?php echo $error; ?>
-                            <button type="button" class="close" data-dismiss="alert">x</button>
-                        </div>
-                        <?php
-                    }
-                    ?>
                     <h4><?php echo $result->name;?>  </h4>
 
 
@@ -157,7 +164,9 @@
 
                         <div class="tab-content">
                             <div id="education" class="tab-pane fade in active">
-                                <h3>Education</h3>
+                                <h3>Education </h3>
+                                <a href="<?php echo site_url("/form/add_employee_education/")?>" type="button" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Add Entry </a>
+
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
@@ -165,6 +174,7 @@
                                         <th>Institution</th>
                                         <th>City</th>
                                         <th>Year</th>
+                                        <th>Actions</th>
                                     </tr>
                                     </thead>
                                     <?php
@@ -174,6 +184,7 @@
                                             <td><?php echo $e->institution;?></td>
                                             <td><?php echo $e->city;?></td>
                                             <td><?php echo $e->year;?></td>
+                                            <td><a href="<?php echo site_url("/form/edit_employee_education/".$detail->result()['0']->employee_id."/".$e->id);?>">Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>    |   <a href="<?php echo site_url("/form/del_employee_education/".$detail->result()['0']->employee_id."/".$e->id);?>">Delete <i class="fa fa-times" aria-hidden="true"></i> </td></a>
                                         </tr>
                                         <?php
                                     }

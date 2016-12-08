@@ -338,10 +338,9 @@ class Form extends CI_Controller {
             );
 
             $this->form_validation->set_rules('name', 'Name', 'required');
-            $this->form_validation->set_rules('father_name', 'Father/Husband Name', 'required');
             $this->form_validation->set_rules('phone_cell', 'Cell Phone', 'numeric');
-            $this->form_validation->set_rules('phone_cell', 'Landline Phone', 'numeric');
-            $this->form_validation->set_rules('dob', 'Date of Birth', 'required');
+            $this->form_validation->set_rules('phone_land', 'Landline Phone', 'numeric');
+//            $this->form_validation->set_rules('dob', 'Date of Birth', 'required');
             $this->form_validation->set_rules('marital_status', 'Marital Status', 'required');
                                 
 
@@ -357,21 +356,25 @@ class Form extends CI_Controller {
                 $db_data['ntn'] = $this->input->post('ntn', TRUE);
                 $db_data['marital_status'] = $this->input->post('marital_status', TRUE);
                 $db_data['address_present'] = $this->input->post('address_present', TRUE);
-
-                if ($this->input->post('address_chkbox',TRUE) == 1){
-                    echo "CHECKED";exit;
-                }
-
                 $db_data['address_perm'] = $this->input->post('address_perm', TRUE);
+
+                //if checkbox is checked OR permanent address is empty
+                if (isset($_POST['address_chkbox'])){
+                    if ($_POST['address_chkbox'] == 1 || $db_data['address_perm'] == "" ){
+                        $db_data['address_perm'] = $db_data['address_present'];
+                    }
+                }
                 $db_data['emergency_contact'] = $this->input->post('emergency_contact', TRUE);
                 $db_data['is_active'] = 1;
 
-                print_r($db_data);exit;  
             
-                $this->Employee_model->add_employee($db_data);
+                if ($this->Employee_model->add_employee($db_data)){
+                    unset($db_data);
+                    $this->session->set_flashdata('message', 'Record added successfully');
+                    redirect('form/view_employee');
+                }
 
-                $this->session->set_flashdata('message', 'Record added successfully');
-                redirect('form/view_employee');
+
             }
             else{
                 $this->session->set_flashdata('error', validation_errors());
@@ -393,7 +396,6 @@ class Form extends CI_Controller {
 
 
         $this->load->view('employee/main',$data);
-//        $this->load->view('employee/view',$data);
 
     }
     
@@ -413,39 +415,49 @@ class Form extends CI_Controller {
         $data = array();
         $data['title'] = "Edit Employee";
         $data['employee'] = $this->Employee_model->get_single_employee($id);
-        $data['kra_list'] = $this->Kra_model->get_kra_simple();//print_r($data['kra_list']);exit;
-        $data['selected_kra'] = $this->Employee_model->get_selected_kra($id);
 
         $this->load->view('employee/edit',$data);
 
         //Check if form is submitted by POST
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            
-            $this->form_validation->set_rules('name', 'Name', 'required');
+
+            $this->form_validation->set_rules('cnic', 'CNIC', 'required');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-            $this->form_validation->set_rules('contact', 'Contact Number', 'numeric');
+            $this->form_validation->set_rules('name', 'Name', 'required');
+            $this->form_validation->set_rules('phone_cell', 'Cell Phone', 'numeric');
+            $this->form_validation->set_rules('phone_land', 'Landline Phone', 'numeric');
+//            $this->form_validation->set_rules('dob', 'Date of Birth', 'required');
 
             if ($this->form_validation->run() != FALSE){
                 $db_data = array();
+                $db_data['cnic'] = $this->input->post('cnic', TRUE);
                 $db_data['name'] = $this->input->post('name', TRUE);
+                $db_data['father_name'] = $this->input->post('father_name', TRUE);
+                $db_data['phone_cell'] = $this->input->post('phone_cell', TRUE);
+                $db_data['phone_land'] = $this->input->post('phone_land', TRUE);
                 $db_data['email'] = $this->input->post('email', TRUE);
-                $db_data['designation'] = $this->input->post('designation', TRUE);
-                $db_data['contact_num'] = $this->input->post('contact', TRUE);
+                $db_data['dob'] = $this->input->post('dob', TRUE);
+                $db_data['ntn'] = $this->input->post('ntn', TRUE);
+                $db_data['marital_status'] = $this->input->post('marital_status', TRUE);
+                $db_data['address_present'] = $this->input->post('address_present', TRUE);
+                $db_data['address_perm'] = $this->input->post('address_perm', TRUE);
 
 
-                $selected_kra = array();
-                $selected_kra['kra'] = $this->input->post('kra', TRUE);
-                //print_r($db_kra);exit;
+                if($this->Employee_model->update_employee($id,$db_data)){
+                    unset($db_data);
+                    $this->session->set_flashdata('message', 'Record edited successfully');
+                    redirect('form/view_employee/'.$id);
+                }
+                else{
+                    echo "FUCKIN ERROR";exit;
+                }
 
-                $this->Employee_model->update_employee($id,$db_data,$selected_kra);
 
-                $this->session->set_flashdata('message', 'Record edited successfully');
-                redirect('form/view_employee/'.$id);
 
             }
             else{
                 $this->session->set_flashdata('error', validation_errors());
-                redirect('form/view_employee/'.$id);
+                redirect('form/edit_employee/'.$id);
             }
 
 

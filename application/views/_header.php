@@ -26,7 +26,7 @@
     <script src="<?php echo base_url();?>plugins/pace/pace.min.js"></script>
 
     <!-- Bootstrap Datepicker -->
-    <link rel="stylesheet" href="<?php echo base_url();?>plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
+<!--    <link rel="stylesheet" href="--><?php //echo base_url();?><!--plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css">-->
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

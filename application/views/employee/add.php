@@ -37,13 +37,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>CNIC *</label>
-                                <input type="text" class="form-control" id="cnic" name="cnic" placeholder="Enter CNIC" required>
+                                <input type="text" class="form-control" id="cnic" name="cnic" placeholder="Enter CNIC" required autofocus >
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Email *</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" required>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" required autocomplete="on">
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <label>Name *</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" required>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" required autocomplete="on">
                                 </div>
                             </div>
                         </div>
@@ -71,13 +71,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Cell Phone</label>
-                                <input type="text" class="form-control" id="phone_cell" name="phone_cell" placeholder="Enter Cell phone"  >
+                                <input type="text" class="form-control" id="phone_cell" name="phone_cell" placeholder="Enter Cell phone" autocomplete="on" >
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Landline</label>
-                                <input type="text" class="form-control" id="phone_land" name="phone_land" placeholder="Enter Landline number" >
+                                <input type="text" class="form-control" id="phone_land" name="phone_land" placeholder="Enter Landline number" autocomplete="on">
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Date of Birth</label>
-                                <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter DOB (mm/dd/yy)">
+                                <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter DOB (mm/dd/yyyy)">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -98,36 +98,47 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Marital Status</label>
-                        <select class="form-control" name="marital_status" id="marital_status" required>
-                            <option value="0">Single</option>
-                            <option value="1">Married</option>
-                        </select>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Marital Status</label>
+                                <select class="form-control" name="marital_status" id="marital_status" required>
+                                    <option value="0">Single</option>
+                                    <option value="1">Married</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
+
+
 
                     <div class="form-group">
                         <label>Present Address</label>
-                        <input type="text" class="form-control" id="address_present" name="address_present" placeholder="Enter Present Address">
+                        <input type="text" class="form-control" id="address_present" name="address_present" placeholder="Enter Present Address" autocomplete="on">
                     </div>
 
                     <div class="form-group">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" id="address_chkbox" > Check this box if Permanent address is same as Present address
+                                <input type="checkbox" name="address_chkbox" id="address_chkbox" value="1"> Check this box if Permanent address is same as Present address
                             </label>
                         </div>
                     </div>
 
                    <div class="form-group">
                         <label>Permanent Address</label>
-                        <input type="text" class="form-control" id="address_perm" name="address_perm" placeholder="Enter Permanent Address" >
+                        <input type="text" class="form-control" id="address_perm" name="address_perm" placeholder="Enter Permanent Address" autocomplete="on" >
                     </div>
 
-                     <div class="form-group">
-                        <label>Emergency Contact</label>
-                        <input type="text" class="form-control" id="emergency_contact" name="emergency_contact" placeholder="Enter Emergency Contact" >
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Emergency Contact</label>
+                                <input type="text" class="form-control" id="emergency_contact" name="emergency_contact" placeholder="Enter Emergency Contact" >
+                            </div>
+                        </div>
                     </div>
+
 
 
 
@@ -154,15 +165,15 @@
 <script>
     $(document).ready(function(){
         //Input Mask
-        $('#cnic').inputmask("99999-9999999-9");
-        $('#phone_cell').inputmask("9999-9999999");
-        $('#phone_land').inputmask("999-9999999");
+//        $('#cnic').inputmask("99999-9999999-9");
+//        $('#phone_cell').inputmask("9999-9999999");
+//        $('#phone_land').inputmask("999-9999999");
 
         //Datepicker
-        $('#dob').datepicker({
-            format: 'mm/dd/yyyy',
-            startDate: '-3d'
-        });
+//        $('#dob').datepicker({
+//            format: 'mm/dd/yyyy',
+//            startDate: '-3d'
+//        });
 
         //Select2
         $('.kra_list').select2({
