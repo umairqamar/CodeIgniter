@@ -326,26 +326,49 @@ class Form extends CI_Controller {
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-            $this->form_validation->set_rules('name', 'Name', 'required');
+            $this->form_validation->set_rules('cnic', 'CNIC', 'required|is_unique[employee.cnic]',
+                array(
+                        'is_unique' => 'Employee with %s already exists.'
+                    )
+                );
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[employee.email]'
                 ,array(
                     'is_unique'     => 'Employee with %s already exists.'
                 )
             );
-            $this->form_validation->set_rules('contact', 'Contact Number', 'numeric');
-            //$this->form_validation->set_rules('kra', 'KRA', 'required');
+
+            $this->form_validation->set_rules('name', 'Name', 'required');
+            $this->form_validation->set_rules('father_name', 'Father/Husband Name', 'required');
+            $this->form_validation->set_rules('phone_cell', 'Cell Phone', 'numeric');
+            $this->form_validation->set_rules('phone_cell', 'Landline Phone', 'numeric');
+            $this->form_validation->set_rules('dob', 'Date of Birth', 'required');
+            $this->form_validation->set_rules('marital_status', 'Marital Status', 'required');
+                                
 
             if ($this->form_validation->run() != FALSE){
                 $db_data = array();
+                $db_data['cnic'] = $this->input->post('cnic', TRUE);
                 $db_data['name'] = $this->input->post('name', TRUE);
+                $db_data['father_name'] = $this->input->post('father_name', TRUE);
+                $db_data['phone_cell'] = $this->input->post('phone_cell', TRUE);
+                $db_data['phone_land'] = $this->input->post('phone_land', TRUE);
                 $db_data['email'] = $this->input->post('email', TRUE);
-                $db_data['designation'] = $this->input->post('designation', TRUE);
-                $db_data['contact_num'] = $this->input->post('contact', TRUE);
+                $db_data['dob'] = $this->input->post('dob', TRUE);
+                $db_data['ntn'] = $this->input->post('ntn', TRUE);
+                $db_data['marital_status'] = $this->input->post('marital_status', TRUE);
+                $db_data['address_present'] = $this->input->post('address_present', TRUE);
 
+                if ($this->input->post('address_chkbox',TRUE) == 1){
+                    echo "CHECKED";exit;
+                }
 
-                $selected_kra = array();
-                $selected_kra['kra'] = $this->input->post('kra', TRUE);
-                $this->Employee_model->add_employee($db_data,$selected_kra);
+                $db_data['address_perm'] = $this->input->post('address_perm', TRUE);
+                $db_data['emergency_contact'] = $this->input->post('emergency_contact', TRUE);
+                $db_data['is_active'] = 1;
+
+                print_r($db_data);exit;  
+            
+                $this->Employee_model->add_employee($db_data);
 
                 $this->session->set_flashdata('message', 'Record added successfully');
                 redirect('form/view_employee');

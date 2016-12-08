@@ -31,18 +31,18 @@
                     }
                     ?>
 
-                    <?php echo form_open('form/add_employee',array('name' => 'add_employee','id' => 'add_employee','data-toggle' => 'validator','role' => 'form')); ?>
+                    <?php echo form_open('form/add_employee',array('name' => 'add_employee','id' => 'add_employee','data-toggle' => 'validator1','role' => 'form')); ?>
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>CNIC</label>
+                                <label>CNIC *</label>
                                 <input type="text" class="form-control" id="cnic" name="cnic" placeholder="Enter CNIC" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Email</label>
+                                <label>Email *</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" required>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label>Name</label>
+                                    <label>Name *</label>
                                     <input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" required>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <label>Father/Husband Name</label>
-                                    <input type="text" class="form-control" id="father_name" name="father_name" placeholder="Enter Father/Husband name" required>
+                                    <input type="text" class="form-control" id="father_name" name="father_name" placeholder="Enter Father/Husband name" >
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Cell Phone</label>
-                                <input type="text" class="form-control" id="phone_cell" name="phone_cell" placeholder="Enter Cell phone" required="" >
+                                <input type="text" class="form-control" id="phone_cell" name="phone_cell" placeholder="Enter Cell phone"  >
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -86,40 +86,29 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Date of Birth *</label>
-                                <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter DOB (mm/dd/yy)" required >
+                                <label>Date of Birth</label>
+                                <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter DOB (mm/dd/yy)">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>NTN#</label>
-                                <input type="text" class="form-control" id="dob" name="dob" placeholder="Enter NTN number (if any)" >
+                                <input type="text" class="form-control" id="ntn" name="ntn" placeholder="Enter NTN number (if any)" >
                             </div>
                         </div>
                     </div>
 
-
-
-
-
-
-
-
-
-
-
-
                     <div class="form-group">
                         <label>Marital Status</label>
-                        <select class="form-control" required>
+                        <select class="form-control" name="marital_status" id="marital_status" required>
                             <option value="0">Single</option>
                             <option value="1">Married</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label>Present Address *</label>
-                        <input type="text" class="form-control" id="address_present" name="address_present" placeholder="Enter Present Address" required>
+                        <label>Present Address</label>
+                        <input type="text" class="form-control" id="address_present" name="address_present" placeholder="Enter Present Address">
                     </div>
 
                     <div class="form-group">
