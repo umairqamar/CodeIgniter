@@ -113,5 +113,22 @@ class Employee_model extends CI_Model {
 
     }
 
+    public function get_education_entry($emp_id,$entry){
+        $this->db->where('id', $entry);
+        $this->db->where('employee_id', $emp_id);
+        $this->db->from('employee_education');
+        $edu = $this->db->get()->result();
+
+        return $edu = $edu[0];
+
+    }
+
+    public function update_education_entry($emp_id,$entry,$data){
+        $this->db->where('id',$entry);
+        $this->db->where('employee_id',$emp_id);
+        $this->db->update('employee_education', $data);
+        return true;
+    }
+
 }
 

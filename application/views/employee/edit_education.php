@@ -5,7 +5,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Add Education Entry : <?php echo $employee->result()['0']->name;?></h3>
+                    <h3 class="panel-title">Edit Education Entry : </h3>
                 </div>
                 <div class="panel-body">
 
@@ -31,21 +31,21 @@
                     }
                     ?>
 
-                    <?php echo form_open('',array('name' => 'add_education','id' => 'add_education')); ?>
+                    <?php echo form_open('',array('name' => 'edit_education','id' => 'edit_education')); ?>
 
                     <div class="form-group">
                         <label>Degree</label>
-                        <input type="text" class="form-control" id="degree" name="degree" placeholder="Enter Degree Name" required>
+                        <input type="text" class="form-control" id="degree" name="degree" value="<?php echo $entry->degree?>" required>
                     </div>
 
                     <div class="form-group">
                         <label>Institution</label>
-                        <input type="text" class="form-control" id="institution" name="institution" placeholder="Enter Institution Name" required>
+                        <input type="text" class="form-control" id="institution" name="institution" value="<?php echo $entry->institution?>" required>
                     </div>
 
                     <div class="form-group">
                         <label>City</label>
-                        <input type="text" class="form-control" id="city" name="city" placeholder="Enter Institution City" required>
+                        <input type="text" class="form-control" id="city" name="city" value="<?php echo $entry->city?>" required>
                     </div>
 
                     <div class="form-group">
@@ -54,8 +54,8 @@
                             <option value="">Select Year</option>
                             <?php
                             for($i = 2020 ; $i >= 1950; $i--){ ?>
-                                <option value="<?php echo $i;?>"><?php echo $i;?></option>
-                                <?php
+                                <option value="<?php echo $i;?>" <?php echo ($i == $entry->year) ? 'selected' : "" ?>><?php echo $i;?></option>
+                            <?php
                             }
                             ?>
                         </select>

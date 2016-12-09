@@ -495,6 +495,41 @@ class Form extends CI_Controller {
         } 
     }
 
+    public function edit_employee_education($emp_id,$entry){
+        $data = array();
+        $data['title'] = "Edit Education Entry";
+        $data['entry'] = $this->Employee_model->get_education_entry($emp_id,$entry);
+
+        //Check if form is submitted by POST
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $this->form_validation->set_rules('degree', 'Degree Name', 'required');
+            $this->form_validation->set_rules('institution', 'Institution Name', 'required');
+            $this->form_validation->set_rules('city', 'Institution City', 'required');
+            if ($this->form_validation->run() != FALSE){
+                $db_data = array();
+                $db_data['degree'] = $this->input->post('degree', TRUE);
+                $db_data['institution'] = $this->input->post('institution', TRUE);
+                $db_data['city'] = $this->input->post('city', TRUE);
+                $db_data['year'] = $this->input->post('year', TRUE);
+                if($this->Employee_model->update_education_entry($emp_id,$entry,$db_data)){
+                    unset($db_data);
+                    $this->session->set_flashdata('message', 'Record Edited successfully');
+                    redirect('form/view_employee/'.$emp_id);
+                }
+
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('form/edit_employee_education/'.$emp_id."/".$entry);
+            }
+        }
+
+
+
+        $this->load->view('employee/edit_education',$data);
+
+    }
+
     public function deactivate_employee($id){
         $this->Employee_model->deactivate_employee($id);
         $this->session->set_flashdata('message', 'User deactivated successfully');
