@@ -12,6 +12,11 @@ class Employee_model extends CI_Model {
         return true;
     }
 
+    public function add_employee_education($data){
+        $this->db->insert("employee_education",$data);
+        return true;
+    }
+
     //Return details of Employees
     public function get_employee_list(){
         $this->db->from('employee');

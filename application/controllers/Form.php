@@ -384,6 +384,39 @@ class Form extends CI_Controller {
 
     }
 
+    public  function add_employee_education($id){
+        $data = array();
+        $data['title'] = "Add Employee Education";
+        $data['employee'] = $this->Employee_model->get_employee_where($id);
+        $this->load->view('employee/add_education',$data);
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $this->form_validation->set_rules('degree', 'Degree Name', 'required');
+            $this->form_validation->set_rules('institution', 'Institution Name', 'required');
+            $this->form_validation->set_rules('city', 'Institution City', 'required');
+
+            if ($this->form_validation->run() != FALSE){
+                $db_data = array();
+                $db_data['employee_id'] = $id;
+                $db_data['degree'] = $this->input->post('degree', TRUE);
+                $db_data['institution'] = $this->input->post('institution', TRUE);
+                $db_data['city'] = $this->input->post('city', TRUE);
+                $db_data['year'] = $this->input->post('year', TRUE);
+
+                if ($this->Employee_model->add_employee_education($db_data)){
+                    unset($db_data);
+                    $this->session->set_flashdata('message', 'Record added successfully');
+                    redirect('form/view_employee/'.$id);
+                }
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('form/add_employee_education/'.$id);
+            }
+
+        }
+    }
+
     public function view_employee($id){
         $data = array();
         $data['title'] = "View Employee";
@@ -448,9 +481,7 @@ class Form extends CI_Controller {
                     $this->session->set_flashdata('message', 'Record edited successfully');
                     redirect('form/view_employee/'.$id);
                 }
-                else{
-                    echo "FUCKIN ERROR";exit;
-                }
+
 
 
 

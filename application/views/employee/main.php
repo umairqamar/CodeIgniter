@@ -165,7 +165,7 @@
                         <div class="tab-content">
                             <div id="education" class="tab-pane fade in active">
                                 <h3>Education </h3>
-                                <a href="<?php echo site_url("/form/add_employee_education/")?>" type="button" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Add Entry </a>
+                                <a href="<?php echo site_url("/form/add_employee_education/".$detail->result()['0']->employee_id);?>" type="button" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Add Entry </a>
 
                                 <table class="table table-striped">
                                     <thead>
