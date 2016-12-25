@@ -17,6 +17,21 @@ class Employee_model extends CI_Model {
         return true;
     }
 
+    public function add_employee_training($data){
+        $this->db->insert("employee_training",$data);
+        return true;
+    }
+
+    public function add_employee_work($data){
+        $this->db->insert('employee_work',$data);
+        return true;
+    }
+
+    public function add_employee_eyecon($data){
+        $this->db->insert('employee_eyecon',$data);
+        return true;
+    }
+
     //Return details of Employees
     public function get_employee_list(){
         $this->db->from('employee');
@@ -40,17 +55,28 @@ class Employee_model extends CI_Model {
         return $this->db->get();
     }
 
-    public function delete_employee($id){
-        $this->db->trans_start();
-        //Delete from Employee table
-        $this->db->where('employee_id', $id);
-        if ($this->db->delete('employee')){
-            //Also delete education data
-            $this->db->where('employee_id', $id);
-            $this->db->delete('employee_education');
-        }
-        $this->db->trans_complete();
+    public function get_employee_training_where($id){
+        $this->db->from('employee_training');
+        $this->db->where('employee_id',$id);
+        $this->db->order_by("id", "asc");
+        return $this->db->get();
     }
+
+    public function get_employee_work_where($id){
+        $this->db->from('employee_work');
+        $this->db->where('employee_id',$id);
+        $this->db->order_by("id", "asc");
+        return $this->db->get();
+    }
+
+    public function get_employee_eyecon_where($id){
+        $this->db->from('employee_eyecon');
+        $this->db->where('employee_id',$id);
+        $this->db->order_by("id", "asc");
+        return $this->db->get();
+    }
+
+
 
 
 
@@ -123,10 +149,104 @@ class Employee_model extends CI_Model {
 
     }
 
+    public function get_training_entry($emp_id,$entry){
+        $this->db->where('id', $entry);
+        $this->db->where('employee_id', $emp_id);
+        $this->db->from('employee_training');
+        $train = $this->db->get()->result();
+
+        return $train = $train[0];
+
+    }
+
+    public function get_work_entry($emp_id,$entry){
+        $this->db->where('id', $entry);
+        $this->db->where('employee_id', $emp_id);
+        $this->db->from('employee_work');
+        $work = $this->db->get()->result();
+
+        return $work = $work[0];
+
+    }
+
+    public function get_eyecon_entry($emp_id,$entry){
+        $this->db->where('id', $entry);
+        $this->db->where('employee_id', $emp_id);
+        $this->db->from('employee_eyecon');
+        $eyecon = $this->db->get()->result();
+
+        return $train = $eyecon[0];
+
+    }
+
     public function update_education_entry($emp_id,$entry,$data){
         $this->db->where('id',$entry);
         $this->db->where('employee_id',$emp_id);
         $this->db->update('employee_education', $data);
+        return true;
+    }
+
+    public function update_training_entry($emp_id,$entry,$data){
+        $this->db->where('id',$entry);
+        $this->db->where('employee_id',$emp_id);
+        $this->db->update('employee_training', $data);
+        return true;
+    }
+
+    public function update_work_entry($emp_id,$entry,$data){
+        $this->db->where('id',$entry);
+        $this->db->where('employee_id',$emp_id);
+        $this->db->update('employee_work', $data);
+        return true;
+    }
+
+    public function update_eyecon_entry($emp_id,$entry,$data){
+        $this->db->where('id',$entry);
+        $this->db->where('employee_id',$emp_id);
+        $this->db->update('employee_eyecon', $data);
+        return true;
+    }
+
+    public function delete_employee($id){
+        $this->db->trans_start();
+        //Delete from Employee table
+        $this->db->where('employee_id', $id);
+        if ($this->db->delete('employee')){
+            //Also delete EDUCATION,TRAINING,WORK HISTORY,EYECON HISTORY data
+            $this->db->where('employee_id', $id);
+            $this->db->delete('employee_education');
+            $this->db->delete('employee_training');
+            $this->db->delete('employee_work');
+            $this->db->delete('employee_eyecon');
+        }
+        $this->db->trans_complete();
+    }
+
+    public function delete_employee_education($emp_id,$entry){
+        $this->db->where('employee_id', $emp_id);
+        $this->db->where('id', $entry);
+        $this->db->delete('employee_education');
+        return true;
+    }
+
+    public function delete_employee_training($emp_id,$entry){
+        $this->db->where('employee_id', $emp_id);
+        $this->db->where('id', $entry);
+        $this->db->delete('employee_training');
+        return true;
+    }
+
+    public function delete_employee_work($emp_id,$entry){
+        $this->db->where('employee_id', $emp_id);
+        $this->db->where('id', $entry);
+        $this->db->delete('employee_work');
+        return true;
+    }
+
+    public function delete_employee_eyecon($emp_id,$entry){
+        $this->db->where('employee_id', $emp_id);
+        $this->db->where('id', $entry);
+        $this->db->delete('employee_eyecon');
         return true;
     }
 

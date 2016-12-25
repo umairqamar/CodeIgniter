@@ -165,8 +165,6 @@
                         <div class="tab-content">
                             <div id="education" class="tab-pane fade in active">
                                 <h3>Education </h3>
-                                <a href="<?php echo site_url("/form/add_employee_education/".$detail->result()['0']->employee_id);?>" type="button" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i> Add Entry </a>
-
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
@@ -184,24 +182,95 @@
                                             <td><?php echo $e->institution;?></td>
                                             <td><?php echo $e->city;?></td>
                                             <td><?php echo $e->year;?></td>
-                                            <td><a href="<?php echo site_url("/form/edit_employee_education/".$detail->result()['0']->employee_id."/".$e->id);?>">Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>    |   <a href="<?php echo site_url("/form/del_employee_education/".$detail->result()['0']->employee_id."/".$e->id);?>">Delete <i class="fa fa-times" aria-hidden="true"></i> </td></a>
+                                            <td><a href="<?php echo site_url("/form/edit_employee_education/".$detail->result()['0']->employee_id."/".$e->id);?>">Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>    |   <a href="<?php echo site_url("/form/del_employee_education/".$detail->result()['0']->employee_id."/".$e->id);?> " onclick="return confirm('Are you sure you want to delete this Entry?')">Delete <i class="fa fa-times" aria-hidden="true"></i> </td></a>
                                         </tr>
                                         <?php
                                     }
                                     ?>
                                 </table>
+                                <a href="<?php echo site_url("/form/add_employee_education/".$detail->result()['0']->employee_id);?>" type="button" class="btn btn-default pull-right"><i class="fa fa-plus" aria-hidden="true"></i> Add Entry </a>
                             </div>
+
                             <div id="training" class="tab-pane fade">
                                 <h3>Training</h3>
-                                <p>Some content in menu 1.</p>
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Training</th>
+                                        <th>Institution</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <?php
+                                    foreach($training->result() as $e){ ?>
+                                        <tr>
+                                            <td><?php echo $e->training;?></td>
+                                            <td><?php echo $e->institution;?></td>
+                                            <td><?php echo $e->start_date;?></td>
+                                            <td><?php echo $e->end_date;?></td>
+                                            <td><a href="<?php echo site_url("/form/edit_employee_training/".$detail->result()['0']->employee_id."/".$e->id);?>">Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>    |   <a href="<?php echo site_url("/form/del_employee_training/".$detail->result()['0']->employee_id."/".$e->id);?>" onclick="return confirm('Are you sure you want to delete this Entry?')">Delete <i class="fa fa-times" aria-hidden="true"></i> </td></a>
+                                        </tr>
+                                        <?php
+                                    }
+                                    ?>
+                                </table>
+                                <a href="<?php echo site_url("/form/add_employee_training/".$detail->result()['0']->employee_id);?>" type="button" class="btn btn-default pull-right"><i class="fa fa-plus" aria-hidden="true"></i> Add Entry </a>
                             </div>
+
                             <div id="work" class="tab-pane fade">
                                 <h3>Work Experience</h3>
-                                <p>Some content in menu 2.</p>
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Company</th>
+                                        <th>Designation</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <?php
+                                    foreach($work->result() as $e){ ?>
+                                        <tr>
+                                            <td><?php echo $e->company;?></td>
+                                            <td><?php echo $e->designation;?></td>
+                                            <td><?php echo $e->start_date;?></td>
+                                            <td><?php echo $e->end_date;?></td>
+                                            <td><a href="<?php echo site_url("/form/edit_employee_work/".$detail->result()['0']->employee_id."/".$e->id);?>">Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>    |   <a href="<?php echo site_url("/form/del_employee_work/".$detail->result()['0']->employee_id."/".$e->id);?>" onclick="return confirm('Are you sure you want to delete this Entry?')">Delete <i class="fa fa-times" aria-hidden="true"></i> </td></a>
+                                        </tr>
+                                        <?php
+                                    }
+                                    ?>
+                                </table>
+                                <a href="<?php echo site_url("/form/add_employee_work/".$detail->result()['0']->employee_id);?>" type="button" class="btn btn-default pull-right"><i class="fa fa-plus" aria-hidden="true"></i> Add Entry </a>
                             </div>
+
                             <div id="eyecon" class="tab-pane fade">
                                 <h3>EYECON History</h3>
-                                <p>Some content in menu 2.</p>
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Designation</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <?php
+                                    foreach($eyecon->result() as $e){ ?>
+                                        <tr>
+                                            <td><?php echo $e->designation;?></td>
+                                            <td><?php echo $e->start_date;?></td>
+                                            <td><?php echo $e->end_date;?></td>
+                                            <td><a href="<?php echo site_url("/form/edit_employee_eyecon/".$detail->result()['0']->employee_id."/".$e->id);?>">Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>    |   <a href="<?php echo site_url("/form/del_employee_eyecon/".$detail->result()['0']->employee_id."/".$e->id);?>" onclick="return confirm('Are you sure you want to delete this Entry?')">Delete <i class="fa fa-times" aria-hidden="true"></i> </td></a>
+                                        </tr>
+                                        <?php
+                                    }
+                                    ?>
+                                </table>
+                                <a href="<?php echo site_url("/form/add_employee_eyecon/".$detail->result()['0']->employee_id);?>" type="button" class="btn btn-default pull-right"><i class="fa fa-plus" aria-hidden="true"></i> Add Entry </a>
                             </div>
                         </div>
                     </div>

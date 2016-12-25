@@ -29,6 +29,15 @@ function marital_status($code){
         case 1:
             return "Married";
             break;
+        case 2:
+            return "Divorced";
+            break;
+        case 3:
+            return "Widowed";
+            break;
+        case 4:
+            return "Prefer not say";
+            break;
         default:
             return "--";
     }

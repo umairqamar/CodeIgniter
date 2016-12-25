@@ -417,6 +417,103 @@ class Form extends CI_Controller {
         }
     }
 
+    public  function add_employee_training($id){
+        $data = array();
+        $data['title'] = "Add Employee Training";
+        $data['employee'] = $this->Employee_model->get_employee_where($id);
+        $this->load->view('employee/add_training',$data);
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $this->form_validation->set_rules('training', 'Training', 'required');
+            $this->form_validation->set_rules('institution', 'Institution Name', 'required');
+            $this->form_validation->set_rules('start_date', 'Start Date', 'required');
+
+            if ($this->form_validation->run() != FALSE){
+                $db_data = array();
+                $db_data['employee_id'] = $id;
+                $db_data['training'] = $this->input->post('training', TRUE);
+                $db_data['institution'] = $this->input->post('institution', TRUE);
+                $db_data['start_date'] = $this->input->post('start_date', TRUE);
+                $db_data['end_date'] = $this->input->post('end_date', TRUE);
+
+                if ($this->Employee_model->add_employee_training($db_data)){
+                    unset($db_data);
+                    $this->session->set_flashdata('message', 'Record added successfully');
+                    redirect('form/view_employee/'.$id);
+                }
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('form/add_employee_training/'.$id);
+            }
+
+        }
+    }
+
+    public  function add_employee_work($id){
+        $data = array();
+        $data['title'] = "Add Employee Work Experience";
+        $data['employee'] = $this->Employee_model->get_employee_where($id);
+        $this->load->view('employee/add_work',$data);
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $this->form_validation->set_rules('company', 'Company', 'required');
+            $this->form_validation->set_rules('designation', 'Designation', 'required');
+            $this->form_validation->set_rules('start_date', 'Start Date', 'required');
+
+            if ($this->form_validation->run() != FALSE){
+                $db_data = array();
+                $db_data['employee_id'] = $id;
+                $db_data['company'] = $this->input->post('company', TRUE);
+                $db_data['designation'] = $this->input->post('designation', TRUE);
+                $db_data['start_date'] = $this->input->post('start_date', TRUE);
+                $db_data['end_date'] = $this->input->post('end_date', TRUE);
+
+                if ($this->Employee_model->add_employee_work($db_data)){
+                    unset($db_data);
+                    $this->session->set_flashdata('message', 'Record added successfully');
+                    redirect('form/view_employee/'.$id);
+                }
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('form/add_employee_work/'.$id);
+            }
+
+        }
+    }
+
+    public  function add_employee_eyecon($id){
+        $data = array();
+        $data['title'] = "Add Employee EYECON History";
+        $data['employee'] = $this->Employee_model->get_employee_where($id);
+        $this->load->view('employee/add_eyecon',$data);
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $this->form_validation->set_rules('designation', 'Designation', 'required');
+            $this->form_validation->set_rules('start_date', 'Start Date', 'required');
+
+            if ($this->form_validation->run() != FALSE){
+                $db_data = array();
+                $db_data['employee_id'] = $id;
+                $db_data['designation'] = $this->input->post('designation', TRUE);
+                $db_data['start_date'] = $this->input->post('start_date', TRUE);
+                $db_data['end_date'] = $this->input->post('end_date', TRUE);
+
+                if ($this->Employee_model->add_employee_eyecon($db_data)){
+                    unset($db_data);
+                    $this->session->set_flashdata('message', 'Record added successfully');
+                    redirect('form/view_employee/'.$id);
+                }
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('form/add_employee_work/'.$id);
+            }
+
+        }
+    }
+
     public function view_employee($id){
         $data = array();
         $data['title'] = "View Employee";
@@ -425,6 +522,9 @@ class Form extends CI_Controller {
         if (isset($id) && !is_null($id) && is_numeric($id)){
             $data['detail'] = $this->Employee_model->get_employee_where($id);
             $data['education'] = $this->Employee_model->get_employee_education_where($id);
+            $data['training'] = $this->Employee_model->get_employee_training_where($id);
+            $data['work'] = $this->Employee_model->get_employee_work_where($id);
+            $data['eyecon'] = $this->Employee_model->get_employee_eyecon_where($id);
         }
 
 
@@ -530,6 +630,111 @@ class Form extends CI_Controller {
 
     }
 
+    public function edit_employee_training($emp_id,$entry){
+        $data = array();
+        $data['title'] = "Edit Training Entry";
+        $data['entry'] = $this->Employee_model->get_training_entry($emp_id,$entry);
+
+        //Check if form is submitted by POST
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $this->form_validation->set_rules('training', 'Training', 'required');
+            $this->form_validation->set_rules('institution', 'Institution Name', 'required');
+            $this->form_validation->set_rules('start_date', 'Start Date', 'required');
+            if ($this->form_validation->run() != FALSE){
+                $db_data = array();
+                $db_data['training'] = $this->input->post('training', TRUE);
+                $db_data['institution'] = $this->input->post('institution', TRUE);
+                $db_data['start_date'] = $this->input->post('start_date', TRUE);
+                $db_data['end_date'] = $this->input->post('end_date', TRUE);
+                if($this->Employee_model->update_training_entry($emp_id,$entry,$db_data)){
+                    unset($db_data);
+                    $this->session->set_flashdata('message', 'Record Edited successfully');
+                    redirect('form/view_employee/'.$emp_id);
+                }
+
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('form/edit_employee_education/'.$emp_id."/".$entry);
+            }
+        }
+
+
+
+        $this->load->view('employee/edit_training',$data);
+
+    }
+
+    public function edit_employee_work($emp_id,$entry){
+        $data = array();
+        $data['title'] = "Edit Work Experience";
+        $data['entry'] = $this->Employee_model->get_work_entry($emp_id,$entry);
+
+        //Check if form is submitted by POST
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $this->form_validation->set_rules('company', 'Company', 'required');
+            $this->form_validation->set_rules('designation', 'Designation', 'required');
+            $this->form_validation->set_rules('start_date', 'Start Date', 'required');
+            if ($this->form_validation->run() != FALSE){
+                $db_data = array();
+                $db_data['company'] = $this->input->post('company', TRUE);
+                $db_data['designation'] = $this->input->post('designation', TRUE);
+                $db_data['start_date'] = $this->input->post('start_date', TRUE);
+                $db_data['end_date'] = $this->input->post('end_date', TRUE);
+                if($this->Employee_model->update_work_entry($emp_id,$entry,$db_data)){
+                    unset($db_data);
+                    $this->session->set_flashdata('message', 'Record Edited successfully');
+                    redirect('form/view_employee/'.$emp_id);
+                }
+
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('form/edit_employee_work/'.$emp_id."/".$entry);
+            }
+        }
+
+
+
+        $this->load->view('employee/edit_work',$data);
+
+    }
+
+
+    public function edit_employee_eyecon($emp_id,$entry){
+        $data = array();
+        $data['title'] = "Edit EYECON History";
+        $data['entry'] = $this->Employee_model->get_eyecon_entry($emp_id,$entry);
+
+        //Check if form is submitted by POST
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $this->form_validation->set_rules('designation', 'Designation', 'required');
+            $this->form_validation->set_rules('start_date', 'Start Date', 'required');
+            if ($this->form_validation->run() != FALSE){
+                $db_data = array();
+                $db_data['designation'] = $this->input->post('designation', TRUE);
+                $db_data['start_date'] = $this->input->post('start_date', TRUE);
+                $db_data['end_date'] = $this->input->post('end_date', TRUE);
+                if($this->Employee_model->update_eyecon_entry($emp_id,$entry,$db_data)){
+                    unset($db_data);
+                    $this->session->set_flashdata('message', 'Record Edited successfully');
+                    redirect('form/view_employee/'.$emp_id);
+                }
+
+            }
+            else{
+                $this->session->set_flashdata('error', validation_errors());
+                redirect('form/edit_employee_eyecon/'.$emp_id."/".$entry);
+            }
+        }
+
+
+
+        $this->load->view('employee/edit_eyecon',$data);
+
+    }
+
+
     public function deactivate_employee($id){
         $this->Employee_model->deactivate_employee($id);
         $this->session->set_flashdata('message', 'User deactivated successfully');
@@ -539,6 +744,36 @@ class Form extends CI_Controller {
         $this->Employee_model->activate_employee($id);
         $this->session->set_flashdata('message', 'User activated successfully');
         redirect('form/view_employee/'.$id);
+    }
+
+
+
+    public function del_employee_education($emp_id,$entry){
+        if ($this->Employee_model->delete_employee_education($emp_id,$entry)){
+            $this->session->set_flashdata('message', 'Record deleted successfully');
+            redirect('form/view_employee/'.$emp_id);
+        }
+    }
+
+    public function del_employee_training($emp_id,$entry){
+        if ($this->Employee_model->delete_employee_training($emp_id,$entry)){
+            $this->session->set_flashdata('message', 'Record deleted successfully');
+            redirect('form/view_employee/'.$emp_id);
+        }
+    }
+
+    public function del_employee_work($emp_id,$entry){
+        if ($this->Employee_model->delete_employee_work($emp_id,$entry)){
+            $this->session->set_flashdata('message', 'Record deleted successfully');
+            redirect('form/view_employee/'.$emp_id);
+        }
+    }
+
+    public function del_employee_eyecon($emp_id,$entry){
+        if ($this->Employee_model->delete_employee_eyecon($emp_id,$entry)){
+            $this->session->set_flashdata('message', 'Record deleted successfully');
+            redirect('form/view_employee/'.$emp_id);
+        }
     }
 
     
