@@ -69,7 +69,8 @@
                 </div>
                 <div class="panel-body">
 
-                    <h4><?php echo $result->name;?>  </h4>
+                    <h4><?php echo $result->name;?> <small><?php echo $result->is_active ==1 ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>';?>
+                        </small> </h4>
 
 
                     <div class="row">
@@ -167,6 +168,8 @@
                             </div>
                         </div>
                     </div>
+
+
 
 
 

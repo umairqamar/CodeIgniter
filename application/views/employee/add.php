@@ -140,7 +140,7 @@
                             </label>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-12">
                             <label>Permanent Address</label>
