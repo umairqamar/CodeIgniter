@@ -211,15 +211,21 @@ class Employee_model extends CI_Model {
         $this->db->trans_start();
         //Delete from Employee table
         $this->db->where('employee_id', $id);
+
         if ($this->db->delete('employee')){
             //Also delete EDUCATION,TRAINING,WORK HISTORY,EYECON HISTORY data
             $this->db->where('employee_id', $id);
             $this->db->delete('employee_education');
+            $this->db->where('employee_id', $id);
             $this->db->delete('employee_training');
+            $this->db->where('employee_id', $id);
             $this->db->delete('employee_work');
+            $this->db->where('employee_id', $id);
             $this->db->delete('employee_eyecon');
+            $this->db->trans_complete();
+            return true;
         }
-        $this->db->trans_complete();
+
     }
 
     public function delete_employee_education($emp_id,$entry){

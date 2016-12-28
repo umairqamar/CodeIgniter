@@ -101,8 +101,10 @@
                             <div class="form-group">
                                 <label>Marital Status</label>
                                 <select class="form-control" name="marital_status" id="marital_status" required>
-                                    <option value="0" <?php echo ($employee->marital_status == 0) ? "Selected":""; ?>>Single</option>
-                                    <option value="1" <?php echo ($employee->marital_status == 1) ? "Selected":""; ?>>Married</option>
+                                    <option value="S" <?php echo ($employee->marital_status == 'S') ? "Selected":""; ?>>Single</option>
+                                    <option value="M" <?php echo ($employee->marital_status == 'M') ? "Selected":""; ?>>Married</option>
+                                    <option value="D" <?php echo ($employee->marital_status == 'D') ? "Selected":""; ?>>Divorced</option>
+                                    <option value="W" <?php echo ($employee->marital_status == 'W') ? "Selected":""; ?>>Widowed</option>
                                 </select>
                             </div>
                         </div>

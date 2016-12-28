@@ -72,61 +72,105 @@
                     <h4><?php echo $result->name;?>  </h4>
 
 
-                    <table class="table">
-                       <tbody>
-                        <tr>
-                            <td>CNIC:</td>
-                            <td><?php echo $result->cnic;?> </td>
-                        </tr>
-                        <tr>
-                            <td>Father/Husband Name:</td>
-                            <td><?php echo $result->father_name;?> </td>
-                        </tr>
-                        <tr>
-                            <td>Cell:</td>
-                            <td><?php echo $result->phone_cell;?> </td>
-                        </tr>
-                        <tr>
-                            <td>Landline:</td>
-                            <td><?php echo $result->phone_land;?> </td>
-                        </tr>
-                        <tr>
-                            <td>Email:</td>
-                            <td><?php echo $result->email;?> </td>
-                        </tr>
-                        <tr>
-                            <td>Date of Birth:</td>
-                            <td><?php echo date("F jS, Y", strtotime($result->dob));?> </td>
-                        </tr>
-                        <tr>
-                            <td>NTN (if any):</td>
-                            <td><?php echo $result->ntn;?> </td>
-                        </tr>
-                        <tr>
-                            <td>Marital Status:</td>
-                            <td><?php echo marital_status($result->marital_status);?> </td>
-                        </tr>
-                        <tr>
-                            <td>Permanent Address:</td>
-                            <td><?php echo $result->address_perm;?> </td>
-                        </tr>
-                        <tr>
-                            <td>Present Address:</td>
-                            <td><?php echo $result->address_present;?> </td>
-                        </tr>
-                        <tr>
-                            <td>Emergency Contact:</td>
-                            <td><?php echo $result->emergency_contact;?> </td>
-                        </tr>
-                        <tr>
-                            <td>Status:</td>
-                            <td><?php echo $result->is_active ==1 ? '<span class="label label-success">Active</span>' : '<span class="label label-default">Inactive</span>';?> </td>
-                        </tr>
-                       </tbody>
-                    </table>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>CNIC</label>
+                                <?php echo $result->cnic;?>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <?php echo $result->email;?>
+                            </div>
+                        </div>
+                    </div>
 
-                           
-                            <?php
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <?php echo $result->name;?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label>Father/Husband Name</label>
+                                    <?php echo $result->father_name;?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Cell Phone</label>
+                                <?php echo $result->phone_cell;?>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Landline</label>
+                                <?php echo $result->phone_land;?>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Date of Birth</label>
+                                <?php echo $result->dob;?>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>NTN#</label>
+                                <?php echo $result->ntn;?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Marital Status</label>
+                                <?php echo marital_status($result->marital_status);?>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label>Present Address</label>
+                        <?php echo $result->address_present_line1." ".$result->address_present_line2." ".$result->address_present_city;?>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Permanent Address</label>
+                        <?php echo $result->address_perm_line1." ".$result->address_perm_line2." ".$result->address_perm_city;?>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Emergency Contact</label>
+                                <?php echo $result->emergency_contact;?>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <?php
                         } ?>
 
                 </div>

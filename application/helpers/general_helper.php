@@ -23,19 +23,19 @@ function get_type($type){
 function marital_status($code){
     $CI =& get_instance();
     switch ($code) {
-        case 0:
+        case 'S':
             return "Single";
             break;
-        case 1:
+        case 'M':
             return "Married";
             break;
-        case 2:
+        case 'D':
             return "Divorced";
             break;
-        case 3:
+        case 'W':
             return "Widowed";
             break;
-        case 4:
+        case 0:
             return "Prefer not say";
             break;
         default:

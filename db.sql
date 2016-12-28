@@ -28,19 +28,25 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `email` varchar(150) NOT NULL,
   `dob` date NOT NULL,
   `ntn` varchar(50) NOT NULL,
-  `marital_status` tinyint(1) NOT NULL COMMENT 'Single=0;Married=1;Divorced;2;Widowed=3;Not specified=4',
-  `address_perm` varchar(200) NOT NULL,
-  `address_present` varchar(200) NOT NULL,
+  `marital_status` varchar(50) NOT NULL COMMENT 'S=Single,M=Married,D=Divorced,W=Widowed',
+  `address_perm_line1` varchar(50) NOT NULL,
+  `address_perm_line2` varchar(50) NOT NULL,
+  `address_perm_city` varchar(50) NOT NULL,
+  `address_present_line1` varchar(50) NOT NULL,
+  `address_present_line2` varchar(50) NOT NULL,
+  `address_present_city` varchar(50) NOT NULL,
+  `emergency_name` varchar(200) NOT NULL,
+  `emergency_relation` varchar(200) NOT NULL,
   `emergency_contact` varchar(200) NOT NULL,
   `is_active` tinyint(4) DEFAULT '1' COMMENT '1= active ; 0=inactive',
   PRIMARY KEY (`employee_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Dumping data for table codeigniter.employee: ~1 rows (approximately)
+-- Dumping data for table codeigniter.employee: ~0 rows (approximately)
 DELETE FROM `employee`;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` (`employee_id`, `cnic`, `name`, `father_name`, `phone_cell`, `phone_land`, `email`, `dob`, `ntn`, `marital_status`, `address_perm`, `address_present`, `emergency_contact`, `is_active`) VALUES
-	(3, '37405-9721786-5', 'Umair Qamar', 'Muhammad Saghir Qamar', '03458541454', '0515527258', 'umairqamar@yahoo.com', '1992-04-29', '', 0, '289/19 Karamdad Market Afshan Colony Rawalpindi', '289/19 Karamdad Market Afshan Colony Rawalpindi', '051-5527258', 1);
+INSERT INTO `employee` (`employee_id`, `cnic`, `name`, `father_name`, `phone_cell`, `phone_land`, `email`, `dob`, `ntn`, `marital_status`, `address_perm_line1`, `address_perm_line2`, `address_perm_city`, `address_present_line1`, `address_present_line2`, `address_present_city`, `emergency_name`, `emergency_relation`, `emergency_contact`, `is_active`) VALUES
+	(4, '37405-9721786-5', 'Umair Qamar', 'Muhammad Saghir Qamar', '3458541454', '03458541454', 'umairqamar@live.com', '1992-04-29', '', 'S', '289/19 Karamdad Market', 'Afshan Colony', 'Rawalpindi', '289/19 Karamdad Market', 'Afshan Colony', 'Rawalpindi', '', '', '03008541454', 1);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 
 
@@ -54,14 +60,13 @@ CREATE TABLE IF NOT EXISTS `employee_education` (
   `city` varchar(100) NOT NULL,
   `year` year(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='Employe Education Records';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Employe Education Records';
 
 -- Dumping data for table codeigniter.employee_education: ~2 rows (approximately)
 DELETE FROM `employee_education`;
 /*!40000 ALTER TABLE `employee_education` DISABLE KEYS */;
 INSERT INTO `employee_education` (`id`, `employee_id`, `degree`, `institution`, `city`, `year`) VALUES
-	(2, 3, 'Pre- Engineering', 'Aslam Foundation Model College', 'Rawalpindi', '2011'),
-	(4, 3, 'BS Software Engineering', 'Riphah International University', 'Islamabad', '2016');
+	(5, 4, 'BS Software Engineering', 'Riphah International University', 'Islamabad', '2016');
 /*!40000 ALTER TABLE `employee_education` ENABLE KEYS */;
 
 
@@ -74,13 +79,13 @@ CREATE TABLE IF NOT EXISTS `employee_eyecon` (
   `start_date` varchar(50) NOT NULL,
   `end_date` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='Employee Eyecon History';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='Employee Eyecon History';
 
--- Dumping data for table codeigniter.employee_eyecon: ~0 rows (approximately)
+-- Dumping data for table codeigniter.employee_eyecon: ~2 rows (approximately)
 DELETE FROM `employee_eyecon`;
 /*!40000 ALTER TABLE `employee_eyecon` DISABLE KEYS */;
 INSERT INTO `employee_eyecon` (`id`, `employee_id`, `designation`, `start_date`, `end_date`) VALUES
-	(1, 3, 'PHP Developer', '2016-09-20', '');
+	(2, 4, 'PHP Developer', '2016-10-15', '');
 /*!40000 ALTER TABLE `employee_eyecon` ENABLE KEYS */;
 
 
@@ -96,11 +101,6 @@ CREATE TABLE IF NOT EXISTS `employee_kra` (
 -- Dumping data for table codeigniter.employee_kra: ~4 rows (approximately)
 DELETE FROM `employee_kra`;
 /*!40000 ALTER TABLE `employee_kra` DISABLE KEYS */;
-INSERT INTO `employee_kra` (`id`, `employee_id`, `kra_id`) VALUES
-	(36, 3, 120),
-	(37, 3, 121),
-	(38, 3, 122),
-	(39, 3, 124);
 /*!40000 ALTER TABLE `employee_kra` ENABLE KEYS */;
 
 
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `employee_training` (
 DELETE FROM `employee_training`;
 /*!40000 ALTER TABLE `employee_training` DISABLE KEYS */;
 INSERT INTO `employee_training` (`id`, `employee_id`, `training`, `institution`, `start_date`, `end_date`) VALUES
-	(3, 3, 'CCNA Routing and Switching', 'Riphah International University', '2016-12-06', '');
+	(4, 4, 'CCNA Routing and Switching', 'Riphah International University', '2016-10-05', '');
 /*!40000 ALTER TABLE `employee_training` ENABLE KEYS */;
 
 
@@ -134,13 +134,13 @@ CREATE TABLE IF NOT EXISTS `employee_work` (
   `start_date` varchar(50) NOT NULL,
   `end_date` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='Employee Work History';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='Employee Work History';
 
--- Dumping data for table codeigniter.employee_work: ~0 rows (approximately)
+-- Dumping data for table codeigniter.employee_work: ~2 rows (approximately)
 DELETE FROM `employee_work`;
 /*!40000 ALTER TABLE `employee_work` DISABLE KEYS */;
 INSERT INTO `employee_work` (`id`, `employee_id`, `company`, `designation`, `start_date`, `end_date`) VALUES
-	(1, 3, 'EYECON', 'PHP Developer', '2016-09-20', '');
+	(2, 4, 'EYECON', 'PHP Developer', '2016-10-01', '');
 /*!40000 ALTER TABLE `employee_work` ENABLE KEYS */;
 
 

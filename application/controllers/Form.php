@@ -355,13 +355,21 @@ class Form extends CI_Controller {
                 $db_data['dob'] = $this->input->post('dob', TRUE);
                 $db_data['ntn'] = $this->input->post('ntn', TRUE);
                 $db_data['marital_status'] = $this->input->post('marital_status', TRUE);
-                $db_data['address_present'] = $this->input->post('address_present', TRUE);
-                $db_data['address_perm'] = $this->input->post('address_perm', TRUE);
+
+                $db_data['address_present_line1'] = $this->input->post('address_present_line1', TRUE);
+                $db_data['address_present_line2'] = $this->input->post('address_present_line2', TRUE);
+                $db_data['address_present_city'] = $this->input->post('address_present_city', TRUE);
+
+                $db_data['address_perm_line1'] = $this->input->post('address_perm_line1', TRUE);
+                $db_data['address_perm_line2'] = $this->input->post('address_perm_line2', TRUE);
+                $db_data['address_perm_city'] = $this->input->post('address_perm_city', TRUE);
 
                 //if checkbox is checked OR permanent address is empty
                 if (isset($_POST['address_chkbox'])){
                     if ($_POST['address_chkbox'] == 1 || $db_data['address_perm'] == "" ){
-                        $db_data['address_perm'] = $db_data['address_present'];
+                        $db_data['address_perm_line1'] = $db_data['address_present_line1'];
+                        $db_data['address_perm_line2'] = $db_data['address_present_line2'];
+                        $db_data['address_perm_city'] = $db_data['address_present_city'];
                     }
                 }
                 $db_data['emergency_contact'] = $this->input->post('emergency_contact', TRUE);
@@ -533,9 +541,15 @@ class Form extends CI_Controller {
     }
     
     public function delete_employee($id){
-        $this->Employee_model->delete_employee($id);
-        $this->session->set_flashdata('message', 'Record deleted successfully');
-        redirect('form/view_employee/');
+        if($this->Employee_model->delete_employee($id)){
+            $this->session->set_flashdata('message', 'Record deleted successfully');
+            redirect('form/view_employee/');
+        }
+        else{
+            $this->session->set_flashdata('error', 'Something Went wrong');
+            redirect('form/view_employee/'.$id);
+        }
+
     }
     
     public function delete_kra_emp($emp,$kra){

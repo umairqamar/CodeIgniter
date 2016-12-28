@@ -103,19 +103,35 @@
                             <div class="form-group">
                                 <label>Marital Status</label>
                                 <select class="form-control" name="marital_status" id="marital_status" required>
-                                    <option value="0">Single</option>
-                                    <option value="1">Married</option>
+                                    <option value="S">Single</option>
+                                    <option value="M">Married</option>
+                                    <option value="D">Divorced</option>
+                                    <option value="W">Widowed</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Present Address</label>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="address_present_line1" name="address_present_line1" placeholder="Address Line 1" autocomplete="on">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="address_present_line2" name="address_present_line2" placeholder="Address Line 2" autocomplete="on">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="address_present_city" name="address_present_city" placeholder="Enter City" autocomplete="on">
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Present Address</label>
-                        <input type="text" class="form-control" id="address_present" name="address_present" placeholder="Enter Present Address" autocomplete="on">
                     </div>
+
+
 
                     <div class="form-group">
                         <div class="checkbox">
@@ -124,17 +140,40 @@
                             </label>
                         </div>
                     </div>
-
-                   <div class="form-group">
-                        <label>Permanent Address</label>
-                        <input type="text" class="form-control" id="address_perm" name="address_perm" placeholder="Enter Permanent Address" autocomplete="on" >
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Permanent Address</label>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="address_perm_line1" name="address_perm_line1" placeholder="Address Line 1" autocomplete="on">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="address_perm_line2" name="address_perm_line2" placeholder="Address Line 2" autocomplete="on">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="address_perm_city" name="address_perm_city" placeholder="Enter City" autocomplete="on">
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
+                    <br/>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
+                            <label>Emergency Contact</label>
                             <div class="form-group">
-                                <label>Emergency Contact</label>
-                                <input type="text" class="form-control" id="emergency_contact" name="emergency_contact" placeholder="Enter Emergency Contact" >
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="emergency_name" name="emergency_name" placeholder="Enter Name" > <br/>
+                                    </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="emergency_relationship" name="emergency_relationship" placeholder="Enter Relationship" ><br/>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="emergency_contact" name="emergency_contact" placeholder="Enter Contact Number" ><br/>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -183,14 +222,25 @@
         //Address Checkbox action
         $('#address_chkbox').change(function() {
             if ($(this).is(':checked')) {
-                var address_present= document.getElementById("address_present").value;;
+                var address_present_line1 = document.getElementById("address_present_line1").value;
+                var address_present_line2 = document.getElementById("address_present_line2").value;
+                var address_present_city = document.getElementById("address_present_city").value;
+
                 //document.getElementById("address_present").value = address_present;
-                document.getElementById("address_perm").value=address_present;
-                $("#address_perm").prop('disabled', true);
+
+                document.getElementById("address_perm_line1").value = address_present_line1;
+                document.getElementById("address_perm_line2").value = address_present_line2;
+                document.getElementById("address_perm_city").value = address_present_city;
+
+                $("#address_perm_line1").prop('disabled', true);
+                $("#address_perm_line2").prop('disabled', true);
+                $("#address_perm_city").prop('disabled', true);
 
             }
             else{
-                $("#address_perm").removeAttr('disabled');
+                $("#address_perm_line1").removeAttr('disabled');
+                $("#address_perm_line2").removeAttr('disabled');
+                $("#address_perm_city").removeAttr('disabled');
             }
         });
 
